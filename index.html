@@ -154,7 +154,32 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
   100%{transform:translateY(-15vh) rotate(360deg);opacity:0}
 }
 
+
+/* إزالة الزهور وكلمات بحبك من الصفحة */
+.bgFlower,.loveWord,#flowerOverlay{display:none !important;}
 </style>
+
+<style>
+.gameInvite{padding:45px 18px;text-align:center;direction:rtl}
+.gameInviteBox{max-width:720px;margin:auto;padding:30px 20px;border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,105,180,.12));border:1px solid rgba(255,255,255,.18);box-shadow:0 15px 45px rgba(0,0,0,.18);backdrop-filter:blur(10px)}
+.gameEmoji{font-size:42px;margin-bottom:8px}.gameInvite h2{margin:5px 0 10px}.gameInvite p{opacity:.9;margin:0 0 20px}
+.gameOpenBtn,.gameSmallBtn,.ctrl{border:0;cursor:pointer;font:inherit;font-weight:700;transition:.2s;touch-action:manipulation}
+.gameOpenBtn{padding:13px 25px;border-radius:999px;background:linear-gradient(135deg,#ff5fa2,#8f63ff);color:#fff;box-shadow:0 8px 22px rgba(255,95,162,.25)}
+.gameOpenBtn:active,.gameSmallBtn:active,.ctrl:active{transform:scale(.95)}
+.gameSection{display:none;max-width:980px;margin:20px auto 55px;padding:20px;direction:rtl}
+.gameHeader{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.gameHeader h2{margin:0 0 5px}.gameHeader p{margin:0;opacity:.8}
+.gameSmallBtn{padding:8px 15px;border-radius:12px;background:rgba(255,255,255,.12);color:inherit}
+.gameHud{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:12px 0;padding:10px;border-radius:15px;background:rgba(255,255,255,.08)}
+.gameCanvasWrap{position:relative;width:100%;overflow:hidden;border-radius:24px;box-shadow:0 20px 55px rgba(0,0,0,.25);background:#211638}
+#loveGame{display:block;width:100%;height:520px;max-height:none;touch-action:none;user-select:none;-webkit-user-select:none}
+.gameMessage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:rgba(19,10,38,.78);backdrop-filter:blur(5px);color:#fff}
+.gameMessage[hidden]{display:none}.giftIcon{font-size:70px;animation:giftPulse 1.2s infinite alternate}.gameMessage h2{margin:8px 0}.gameMessage p{margin:0 0 18px;max-width:520px}
+@keyframes giftPulse{to{transform:scale(1.08) rotate(-3deg)}}
+.gameControls{display:flex;justify-content:center;gap:16px;margin:16px 0 8px}.ctrl{width:72px;height:58px;border-radius:18px;background:linear-gradient(145deg,#ff70ae,#755cff);color:#fff;font-size:27px;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.gameHint{text-align:center;font-size:13px;opacity:.7;margin:5px 0}
+@media(max-width:600px){.gameSection{padding:12px}.gameHeader{align-items:flex-start}.gameHeader h2{font-size:20px}.gameHeader p{font-size:13px}.gameCanvasWrap{border-radius:17px}.ctrl{width:64px;height:54px}.gameControls{gap:10px}}
+</style>
+
 </head>
 <body>
 
@@ -254,6 +279,50 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
     </div>
   </section>
 
+
+
+  <section class="gameInvite">
+    <div class="gameInviteBox">
+      <div class="gameEmoji">🎮❤️</div>
+      <h2>عندنا مغامرة صغيرة كمان...</h2>
+      <p>اجمعي القلوب، عدّي المراحل، وفي الآخر افتحي الهدية 🎁</p>
+      <button id="openGameBtn" class="gameOpenBtn">ابدئي اللعبة ✨</button>
+    </div>
+  </section>
+
+  <section id="gameSection" class="gameSection" aria-label="لعبة حكايتنا">
+    <div class="gameHeader">
+      <div>
+        <h2>🎮 مغامرة حكايتنا ❤️</h2>
+        <p id="gameStatus">المرحلة 1 من 3 — اجمعي كل القلوب!</p>
+      </div>
+      <button id="closeGameBtn" class="gameSmallBtn">إغلاق ×</button>
+    </div>
+
+    <div class="gameHud">
+      <span>❤️ <b id="gameHearts">0</b>/<b id="gameTotal">0</b></span>
+      <span>⭐ <b id="gameScore">0</b></span>
+      <span>🏁 <b id="gameLevel">1</b>/3</span>
+    </div>
+
+    <div class="gameCanvasWrap">
+      <canvas id="loveGame" width="900" height="520"></canvas>
+      <div id="gameMessage" class="gameMessage" hidden>
+        <div class="giftIcon">🎁</div>
+        <h2 id="gameMessageTitle">أحسنتِ! وصلتي للنهاية ❤️</h2>
+        <p id="gameMessageText">كل قلب جمعتيه كان خطوة أقرب للهدية.</p>
+        <button id="gameNextBtn" class="gameOpenBtn">كمّلي ✨</button>
+      </div>
+    </div>
+
+    <div class="gameControls" aria-label="أزرار التحكم">
+      <button class="ctrl" id="leftBtn">◀</button>
+      <button class="ctrl" id="jumpBtn">⬆</button>
+      <button class="ctrl" id="rightBtn">▶</button>
+    </div>
+    <p class="gameHint">على الموبايل: استخدمي الأزرار تحت اللعبة — وعلى الكمبيوتر استخدمي الأسهم أو A / D و Space.</p>
+  </section>
+
 </main>
 
 <script>
@@ -264,12 +333,6 @@ function unlock(){
     document.getElementById("login").style.display="none";
     document.getElementById("site").style.display="block";
     
-const flowerOverlay = document.getElementById("flowerOverlay");
-if (flowerOverlay) {
-  flowerOverlay.classList.add("show");
-  setTimeout(() => flowerOverlay.classList.remove("show"), 2000);
-}
-
 const song = document.getElementById("loveSong");
     song.volume = 0.8;
     song.currentTime = 30;
@@ -293,5 +356,195 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 </script>
+
+
+<script>
+(function(){
+  const openBtn=document.getElementById('openGameBtn');
+  const closeBtn=document.getElementById('closeGameBtn');
+  const section=document.getElementById('gameSection');
+  const canvas=document.getElementById('loveGame');
+  if(!openBtn||!closeBtn||!section||!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+  const statusEl=document.getElementById('gameStatus'), heartsEl=document.getElementById('gameHearts'), totalEl=document.getElementById('gameTotal'), scoreEl=document.getElementById('gameScore'), levelEl=document.getElementById('gameLevel');
+  const msg=document.getElementById('gameMessage'), msgTitle=document.getElementById('gameMessageTitle'), msgText=document.getElementById('gameMessageText'), nextBtn=document.getElementById('gameNextBtn');
+
+  const romanticMessages=[
+    'وجودك في حياتي من أجمل الحاجات اللي حصلتلي ❤️',
+    'كل مرة بشوفك فيها بحس إن الدنيا بقت أحلى ✨',
+    'أجمل حاجة في حكايتي إنك جزء منها 💗',
+    'ضحكتك لوحدها كفاية تخلي يومي أحلى 🌷',
+    'نفسي كل لحظة حلوة في حياتي يكون ليكي فيها مكان ❤️',
+    'معاكي أبسط اللحظات بتبقى ذكريات جميلة 🥰',
+    'إنتِ من الناس اللي وجودهم بيخلّي الدنيا أحنّ وأجمل 💕',
+    'كل خطوة في اللعبة دي بتفكرني بقد إيه وجودك غالي عندي 🌸'
+  ];
+  let lastRomanticIndex=-1;
+  function randomRomanticMessage(){
+    let i=Math.floor(Math.random()*romanticMessages.length);
+    if(romanticMessages.length>1 && i===lastRomanticIndex) i=(i+1)%romanticMessages.length;
+    lastRomanticIndex=i;
+    return romanticMessages[i];
+  }
+
+  const levels=[
+    {bg1:'#17112f',bg2:'#6d3b75',platforms:[[0,370,900,50],[90,300,180,18],[340,245,170,18],[590,300,170,18]],hearts:[[145,265],[420,210],[665,265]],goal:[820,320]},
+    {bg1:'#101d38',bg2:'#7b4c8f',platforms:[[0,370,900,50],[40,315,150,18],[250,270,145,18],[470,315,145,18],[665,255,170,18]],hearts:[[100,280],[315,235],[540,280],[750,220]],goal:[840,205]},
+    {bg1:'#21113b',bg2:'#c0578d',platforms:[[0,370,900,50],[90,305,130,18],[280,245,135,18],[490,300,135,18],[690,225,130,18],[800,150,100,18]],hearts:[[145,270],[335,210],[545,265],[745,190],[850,115]],goal:[850,100]}
+  ];
+
+  let level=0,score=0,running=false,last=0,hearts=[],particles=[];
+  const input={left:false,right:false};
+  const player={x:30,y:330,w:34,h:42,vx:0,vy:0,onGround:true};
+
+  function resetLevel(){
+    const L=levels[level];
+    player.x=30; player.y=L.platforms[0][1]-player.h; player.vx=0; player.vy=0; player.onGround=true;
+    hearts=L.hearts.map((p,i)=>({x:p[0],y:p[1],r:12,taken:false,phase:i*.8}));
+    totalEl.textContent=hearts.length; heartsEl.textContent=0; levelEl.textContent=level+1;
+    statusEl.textContent=`المرحلة ${level+1} من 3 — اجمعي كل القلوب وروحي للبنت!`;
+    msg.hidden=true;
+  }
+
+  function openGame(){
+    section.style.display='block';
+    resetLevel();
+    msgText.textContent=randomRomanticMessage();
+    running=true;
+    last=performance.now();
+    section.scrollIntoView({behavior:'smooth',block:'center'});
+    requestAnimationFrame(loop);
+  }
+  openBtn.addEventListener('click',openGame);
+  closeBtn.addEventListener('click',()=>{running=false;section.style.display='none';});
+  nextBtn.addEventListener('click',()=>{
+    if(level<2){level++;resetLevel();running=true;last=performance.now();requestAnimationFrame(loop);}
+    else{
+      msgTitle.textContent='وصلتي للنهاية! 🎁❤️';
+      msgText.innerHTML='بجد انت اجمل حاجه حصلت لي في حياتي<br>انا محظوظ بك قوي<br>ربنا يخليك ليا وما يحرمنيش منك ابدا ❤️';
+      nextBtn.textContent='إعادة اللعبة 🔄';
+      nextBtn.onclick=()=>{level=0;score=0;nextBtn.onclick=null;resetLevel();running=true;last=performance.now();requestAnimationFrame(loop);};
+    }
+  });
+
+  function bindMove(id,dir){
+    const el=document.getElementById(id); if(!el)return;
+    el.type='button';
+    el.style.touchAction='none';
+    el.addEventListener('pointerdown',e=>{e.preventDefault(); if(running) input[dir]=true;},{passive:false});
+    ['pointerup','pointercancel','pointerleave'].forEach(ev=>el.addEventListener(ev,e=>{e.preventDefault();input[dir]=false;},{passive:false}));
+    el.addEventListener('click',e=>{e.preventDefault();if(running){player.x += dir==='right'?45:-45; clampPlayer();}},{passive:false});
+  }
+  bindMove('leftBtn','left');
+  bindMove('rightBtn','right');
+
+  // لو فيه زر قفز في النسخة الحالية استخدمه، وإلا الأسهم/المساحة تعمل على الكمبيوتر.
+  const jumpBtn=document.getElementById('jumpBtn');
+  function jump(){if(running&&player.onGround){player.vy=-12;player.onGround=false;}}
+  if(jumpBtn){
+    jumpBtn.type='button';jumpBtn.style.touchAction='none';
+    jumpBtn.addEventListener('pointerdown',e=>{e.preventDefault();jump();},{passive:false});
+    jumpBtn.addEventListener('click',e=>{e.preventDefault();jump();},{passive:false});
+  }
+  window.addEventListener('keydown',e=>{
+    const k=e.key.toLowerCase();
+    if(k==='arrowleft'||k==='a') input.left=true;
+    if(k==='arrowright'||k==='d') input.right=true;
+    if(k==='arrowup'||k==='w'||k===' ') {e.preventDefault();jump();}
+  });
+  window.addEventListener('keyup',e=>{
+    const k=e.key.toLowerCase();
+    if(k==='arrowleft'||k==='a') input.left=false;
+    if(k==='arrowright'||k==='d') input.right=false;
+  });
+
+  function clampPlayer(){
+    if(player.x<0)player.x=0;
+    if(player.x+player.w>W)player.x=W-player.w;
+  }
+  function update(dt){
+    const L=levels[level];
+    // حركة مباشرة وموثوقة: اليمين = قدام، الشمال = رجوع.
+    const dir=(input.right?1:0)-(input.left?1:0);
+    player.vx=dir*6.5;
+    player.x += player.vx;
+    clampPlayer();
+
+    const prevBottom=player.y+player.h;
+    player.vy += 0.6;
+    if(player.vy>14)player.vy=14;
+    player.y += player.vy;
+    player.onGround=false;
+
+    for(const p of L.platforms){
+      const [px,py,pw,ph]=p;
+      const horizontal=player.x+player.w>px && player.x<px+pw;
+      const crossed=prevBottom<=py && player.y+player.h>=py && player.vy>=0;
+      if(horizontal&&crossed){player.y=py-player.h;player.vy=0;player.onGround=true;break;}
+    }
+    if(player.y>H+80){player.x=30;player.y=L.platforms[0][1]-player.h;player.vx=0;player.vy=0;player.onGround=true;}
+
+    hearts.forEach(h=>{
+      const dx=(player.x+player.w/2)-h.x,dy=(player.y+player.h/2)-h.y;
+      if(!h.taken&&Math.hypot(dx,dy)<30){h.taken=true;score+=10;particles.push({x:h.x,y:h.y,t:0});}
+    });
+    heartsEl.textContent=hearts.filter(h=>h.taken).length;
+    scoreEl.textContent=score;
+    const all=hearts.every(h=>h.taken),g=L.goal;
+    if(all&&Math.hypot((player.x+player.w/2)-g[0],(player.y+player.h/2)-g[1])<48){finishLevel();return;}
+    particles.forEach(p=>p.t+=dt);particles=particles.filter(p=>p.t<.8);
+  }
+
+  function finishLevel(){
+    running=false;msg.hidden=false;
+    if(level<2){msgTitle.textContent='أحسنتِ! وصلتي للنهاية ❤️';msgText.textContent=randomRomanticMessage()+' — والهدية قربت...';nextBtn.textContent='المرحلة اللي بعدها ➜';}
+    else{msgTitle.textContent='وصلتي للنهاية! 🎁❤️';msgText.textContent=randomRomanticMessage()+' — كل القلوب اتجمعت، دلوقتي افتحي الهدية.';nextBtn.textContent='افتحي الهدية 💌';}
+  }
+
+  function draw(){
+    const L=levels[level];
+    const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,L.bg1);g.addColorStop(1,L.bg2);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha=.8;ctx.fillStyle='#fff';for(let i=0;i<38;i++){const x=(i*83+37)%W,y=(i*47+22)%260;ctx.fillRect(x,y,2,2);}ctx.globalAlpha=1;
+    ctx.fillStyle='#ffe9a8';ctx.beginPath();ctx.arc(760,75,34,0,Math.PI*2);ctx.fill();
+    ctx.globalAlpha=.18;ctx.fillStyle='#fff';for(let i=0;i<14;i++){const x=i*72,h=35+(i*17)%80;ctx.fillRect(x,H-50-h,55,h)}ctx.globalAlpha=1;
+    L.platforms.forEach((p,i)=>{ctx.fillStyle=i===0?'#4a315e':'#8c5b9b';ctx.fillRect(p[0],p[1],p[2],p[3]);ctx.fillStyle='rgba(255,255,255,.2)';ctx.fillRect(p[0],p[1],p[2],3);});
+    hearts.forEach(h=>{if(h.taken)return;const pulse=1+Math.sin(performance.now()/180+h.phase)*.1;drawHeart(h.x,h.y,14*pulse);});
+    const gx=L.goal[0],gy=L.goal[1];
+    // البنت بدل الراية عند نهاية المرحلة
+    ctx.save();
+    ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(gx,gy+4,17,5,0,0,Math.PI*2);ctx.fill();
+    // شعر
+    ctx.fillStyle='#5b2f4f';ctx.beginPath();ctx.arc(gx,gy-25,15,0,Math.PI*2);ctx.fill();
+    // وجه
+    ctx.fillStyle='#ffd9c7';ctx.beginPath();ctx.arc(gx,gy-27,11,0,Math.PI*2);ctx.fill();
+    // شعر جانبي
+    ctx.fillStyle='#5b2f4f';ctx.fillRect(gx-13,gy-30,5,22);ctx.fillRect(gx+8,gy-30,5,22);
+    // جسم ولبس
+    ctx.fillStyle='#ff77b7';ctx.beginPath();ctx.moveTo(gx-10,gy-15);ctx.lineTo(gx+10,gy-15);ctx.lineTo(gx+15,gy+2);ctx.lineTo(gx-15,gy+2);ctx.closePath();ctx.fill();
+    // عينين
+    ctx.fillStyle='#4a315e';ctx.beginPath();ctx.arc(gx-4,gy-28,1.3,0,Math.PI*2);ctx.arc(gx+4,gy-28,1.3,0,Math.PI*2);ctx.fill();
+    // قلب صغير فوقها
+    drawHeart(gx,gy-50,6);
+    ctx.restore();
+    // شخصية ثابتة وواضحة، من غير أي وميض.
+    ctx.save();
+    ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(player.x+17,player.y+42,15,4,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#ffd7e8';ctx.beginPath();ctx.arc(player.x+17,player.y+11,12,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#6b3c62';ctx.beginPath();ctx.arc(player.x+17,player.y+9,12,Math.PI,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#ff77b7';ctx.fillRect(player.x+5,player.y+22,24,18);
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(player.x+12,player.y+10,2.2,0,Math.PI*2);ctx.arc(player.x+22,player.y+10,2.2,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#6b3c62';ctx.beginPath();ctx.arc(player.x+12,player.y+10,.9,0,Math.PI*2);ctx.arc(player.x+22,player.y+10,.9,0,Math.PI*2);ctx.fill();
+    ctx.restore();
+    particles.forEach(p=>{ctx.globalAlpha=1-p.t/.8;drawHeart(p.x,p.y-p.t*55,8);ctx.globalAlpha=1;});
+    ctx.fillStyle='rgba(255,255,255,.85)';ctx.font='bold 18px sans-serif';ctx.textAlign='center';ctx.fillText('اجمعي القلوب وروحي للبنت 💗',W/2,32);
+  }
+  function drawHeart(x,y,s){ctx.save();ctx.translate(x,y);ctx.rotate(-.15);ctx.fillStyle='#ff6fae';ctx.beginPath();ctx.moveTo(0,s*.9);ctx.bezierCurveTo(-s*1.5,-s*.1,-s*.9,-s*1.1,0,-s*.45);ctx.bezierCurveTo(s*.9,-s*1.1,s*1.5,-s*.1,0,s*.9);ctx.fill();ctx.restore();}
+  function loop(t){if(!running)return;const dt=Math.min(.032,(t-last)/1000);last=t;update(dt);draw();requestAnimationFrame(loop);}
+  resetLevel(); draw();
+})();
+</script>
+
+
 </body>
 </html>
