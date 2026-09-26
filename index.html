@@ -294,7 +294,7 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
     <div class="gameHeader">
       <div>
         <h2>🎮 مغامرة حكايتنا ❤️</h2>
-        <p id="gameStatus">المرحلة 1 من 3 — اجمعي كل القلوب!</p>
+        <p id="gameStatus">المرحلة 1 من 10 — اجمعي كل القلوب!</p>
       </div>
       <button id="closeGameBtn" class="gameSmallBtn">إغلاق ×</button>
     </div>
@@ -302,7 +302,7 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
     <div class="gameHud">
       <span>❤️ <b id="gameHearts">0</b>/<b id="gameTotal">0</b></span>
       <span>⭐ <b id="gameScore">0</b></span>
-      <span>🏁 <b id="gameLevel">1</b>/3</span>
+      <span>🎯 <b id="gameLevel">1</b>/10</span>
     </div>
 
     <div class="gameCanvasWrap">
@@ -389,12 +389,21 @@ tick();setInterval(tick,1000);
   }
 
   const levels=[
-    {bg1:'#17112f',bg2:'#6d3b75',platforms:[[0,370,900,50],[90,300,180,18],[340,245,170,18],[590,300,170,18]],hearts:[[145,265],[420,210],[665,265]],goal:[820,320]},
-    {bg1:'#101d38',bg2:'#7b4c8f',platforms:[[0,370,900,50],[40,315,150,18],[250,270,145,18],[470,315,145,18],[665,255,170,18]],hearts:[[100,280],[315,235],[540,280],[750,220]],goal:[840,205]},
-    {bg1:'#21113b',bg2:'#c0578d',platforms:[[0,370,900,50],[90,305,130,18],[280,245,135,18],[490,300,135,18],[690,225,130,18],[800,150,100,18]],hearts:[[145,270],[335,210],[545,265],[745,190],[850,115]],goal:[850,100]}
+    {bg1:'#17112f',bg2:'#6d3b75',platforms:[[0,370,900,50],[80,305,170,18],[330,250,170,18],[590,300,170,18]],hearts:[[130,270],[380,215],[640,265]],goal:[815,270]},
+    {bg1:'#101d38',bg2:'#7b4c8f',platforms:[[0,370,900,50],[35,315,145,18],[240,265,150,18],[465,310,145,18],[650,245,180,18]],hearts:[[85,280],[300,230],[520,275],[735,210]],goal:[815,215]},
+    {bg1:'#21113b',bg2:'#c0578d',platforms:[[0,370,900,50],[75,300,135,18],[270,235,145,18],[485,295,140,18],[675,220,145,18],[800,150,100,18]],hearts:[[120,265],[340,200],[540,260],[725,185],[850,115]],goal:[850,115]},
+    {bg1:'#102c35',bg2:'#557b8f',platforms:[[0,370,900,50],[55,315,120,18],[220,275,125,18],[390,220,150,18],[600,275,120,18],[760,205,110,18]],hearts:[[95,280],[270,240],[465,185],[640,240],[815,170]],goal:[815,170]},
+    {bg1:'#24153b',bg2:'#8d5aa8',platforms:[[0,370,900,50],[90,315,130,18],[285,280,120,18],[455,230,130,18],[635,285,125,18],[790,225,95,18]],hearts:[[125,280],[325,245],[520,195],[695,250],[835,190]],goal:[835,190]},
+    {bg1:'#12243e',bg2:'#4f79aa',platforms:[[0,370,900,50],[40,300,150,18],[235,235,120,18],[400,290,120,18],[565,215,135,18],[750,275,125,18],[805,150,70,18]],hearts:[[110,265],[295,200],[460,255],[630,180],[805,240],[840,115]],goal:[840,115]},
+    {bg1:'#32142d',bg2:'#b95d7f',platforms:[[0,370,900,50],[70,315,115,18],[230,260,135,18],[430,310,120,18],[575,245,125,18],[735,195,130,18]],hearts:[[125,280],[295,225],[490,275],[635,210],[800,160]],goal:[800,160]},
+    {bg1:'#172d28',bg2:'#5c9b83',platforms:[[0,370,900,50],[35,310,135,18],[205,250,125,18],[370,300,130,18],[540,235,130,18],[700,285,100,18],[810,205,75,18]],hearts:[[95,275],[265,215],[435,265],[605,200],[750,250],[845,170]],goal:[845,170]},
+    {bg1:'#2c173d',bg2:'#a66bc0',platforms:[[0,370,900,50],[80,300,125,18],[250,220,135,18],[430,285,125,18],[590,200,125,18],[760,255,120,18],[815,140,70,18]],hearts:[[125,265],[315,185],[490,250],[650,165],[815,220],[845,105]],goal:[845,105]},
+    {bg1:'#17122e',bg2:'#d05a9b',platforms:[[0,370,900,50],[50,310,120,18],[215,260,125,18],[380,205,125,18],[545,270,120,18],[690,205,120,18],[805,145,75,18]],hearts:[[100,275],[280,225],[445,170],[605,235],[750,170],[840,110]],goal:[840,110]}
   ];
 
   let level=0,score=0,running=false,last=0,hearts=[],particles=[];
+  let carryAnim={active:false,t:0};
+  let levelFinished=false;
   const input={left:false,right:false};
   const player={x:30,y:330,w:34,h:42,vx:0,vy:0,onGround:true};
 
@@ -403,7 +412,9 @@ tick();setInterval(tick,1000);
     player.x=30; player.y=L.platforms[0][1]-player.h; player.vx=0; player.vy=0; player.onGround=true;
     hearts=L.hearts.map((p,i)=>({x:p[0],y:p[1],r:12,taken:false,phase:i*.8}));
     totalEl.textContent=hearts.length; heartsEl.textContent=0; levelEl.textContent=level+1;
-    statusEl.textContent=`المرحلة ${level+1} من 3 — اجمعي كل القلوب وروحي للبنت!`;
+    statusEl.textContent=`المرحلة ${level+1} من 10 — اجمعي كل القلوب وروحي للبنت!`;
+    carryAnim={active:false,t:0};
+    levelFinished=false;
     msg.hidden=true;
   }
 
@@ -419,7 +430,7 @@ tick();setInterval(tick,1000);
   openBtn.addEventListener('click',openGame);
   closeBtn.addEventListener('click',()=>{running=false;section.style.display='none';});
   nextBtn.addEventListener('click',()=>{
-    if(level<2){level++;resetLevel();running=true;last=performance.now();requestAnimationFrame(loop);}
+    if(level<9){level++;resetLevel();running=true;last=performance.now();requestAnimationFrame(loop);}
     else{
       msgTitle.textContent='وصلتي للنهاية! 🎁❤️';
       msgText.innerHTML='بجد انت اجمل حاجه حصلت لي في حياتي<br>انا محظوظ بك قوي<br>ربنا يخليك ليا وما يحرمنيش منك ابدا ❤️';
@@ -465,6 +476,24 @@ tick();setInterval(tick,1000);
   }
   function update(dt){
     const L=levels[level];
+    if(carryAnim.active){
+      carryAnim.t+=dt;
+      if(carryAnim.t>=1.6){
+        carryAnim.active=false;
+        running=false;
+        msg.hidden=false;
+        if(level<9){
+          msgTitle.textContent='هوصلك مهما حصل يا حبيبتي ❤️';
+          msgText.textContent=randomRomanticMessage()+' — يلا على المرحلة اللي بعدها!';
+          nextBtn.textContent='المرحلة اللي بعدها ➜';
+        }else{
+          msgTitle.textContent='هوصلك مهما حصل يا حبيبتي ❤️';
+          msgText.textContent=randomRomanticMessage()+' — كل القلوب اتجمعت، دلوقتي افتحي الهدية.';
+          nextBtn.textContent='افتحي الهدية 💌';
+        }
+      }
+      return;
+    }
     // حركة مباشرة وموثوقة: اليمين = قدام، الشمال = رجوع.
     const dir=(input.right?1:0)-(input.left?1:0);
     player.vx=dir*6.5;
@@ -492,14 +521,15 @@ tick();setInterval(tick,1000);
     heartsEl.textContent=hearts.filter(h=>h.taken).length;
     scoreEl.textContent=score;
     const all=hearts.every(h=>h.taken),g=L.goal;
-    if(all&&Math.hypot((player.x+player.w/2)-g[0],(player.y+player.h/2)-g[1])<48){finishLevel();return;}
+    if(all&&!levelFinished&&Math.hypot((player.x+player.w/2)-g[0],(player.y+player.h/2)-g[1])<48){finishLevel();return;}
     particles.forEach(p=>p.t+=dt);particles=particles.filter(p=>p.t<.8);
   }
 
   function finishLevel(){
-    running=false;msg.hidden=false;
-    if(level<2){msgTitle.textContent='أحسنتِ! وصلتي للنهاية ❤️';msgText.textContent=randomRomanticMessage()+' — والهدية قربت...';nextBtn.textContent='المرحلة اللي بعدها ➜';}
-    else{msgTitle.textContent='وصلتي للنهاية! 🎁❤️';msgText.textContent=randomRomanticMessage()+' — كل القلوب اتجمعت، دلوقتي افتحي الهدية.';nextBtn.textContent='افتحي الهدية 💌';}
+    if(levelFinished)return;
+    levelFinished=true;
+    input.left=false;input.right=false;
+    carryAnim={active:true,t:0};
   }
 
   function draw(){
@@ -511,33 +541,45 @@ tick();setInterval(tick,1000);
     L.platforms.forEach((p,i)=>{ctx.fillStyle=i===0?'#4a315e':'#8c5b9b';ctx.fillRect(p[0],p[1],p[2],p[3]);ctx.fillStyle='rgba(255,255,255,.2)';ctx.fillRect(p[0],p[1],p[2],3);});
     hearts.forEach(h=>{if(h.taken)return;const pulse=1+Math.sin(performance.now()/180+h.phase)*.1;drawHeart(h.x,h.y,14*pulse);});
     const gx=L.goal[0],gy=L.goal[1];
-    // البنت بدل الراية عند نهاية المرحلة
-    ctx.save();
-    ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(gx,gy+4,17,5,0,0,Math.PI*2);ctx.fill();
-    // شعر
-    ctx.fillStyle='#5b2f4f';ctx.beginPath();ctx.arc(gx,gy-25,15,0,Math.PI*2);ctx.fill();
-    // وجه
-    ctx.fillStyle='#ffd9c7';ctx.beginPath();ctx.arc(gx,gy-27,11,0,Math.PI*2);ctx.fill();
-    // شعر جانبي
-    ctx.fillStyle='#5b2f4f';ctx.fillRect(gx-13,gy-30,5,22);ctx.fillRect(gx+8,gy-30,5,22);
-    // جسم ولبس
-    ctx.fillStyle='#ff77b7';ctx.beginPath();ctx.moveTo(gx-10,gy-15);ctx.lineTo(gx+10,gy-15);ctx.lineTo(gx+15,gy+2);ctx.lineTo(gx-15,gy+2);ctx.closePath();ctx.fill();
-    // عينين
-    ctx.fillStyle='#4a315e';ctx.beginPath();ctx.arc(gx-4,gy-28,1.3,0,Math.PI*2);ctx.arc(gx+4,gy-28,1.3,0,Math.PI*2);ctx.fill();
-    // قلب صغير فوقها
-    drawHeart(gx,gy-50,6);
-    ctx.restore();
-    // شخصية ثابتة وواضحة، من غير أي وميض.
-    ctx.save();
-    ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(player.x+17,player.y+42,15,4,0,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#ffd7e8';ctx.beginPath();ctx.arc(player.x+17,player.y+11,12,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#6b3c62';ctx.beginPath();ctx.arc(player.x+17,player.y+9,12,Math.PI,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#ff77b7';ctx.fillRect(player.x+5,player.y+22,24,18);
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(player.x+12,player.y+10,2.2,0,Math.PI*2);ctx.arc(player.x+22,player.y+10,2.2,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#6b3c62';ctx.beginPath();ctx.arc(player.x+12,player.y+10,.9,0,Math.PI*2);ctx.arc(player.x+22,player.y+10,.9,0,Math.PI*2);ctx.fill();
-    ctx.restore();
+    // البنت عند نهاية المرحلة، وعند الوصول لها يحملها اللاعب في مشهد قصير.
+    if(!carryAnim.active){
+      drawGirl(gx,gy,1);
+    }
+    // شخصية اللاعب
+    drawBoy(player.x,player.y,1);
+    if(carryAnim.active){
+      const a=Math.min(1,carryAnim.t/1.6);
+      const lift=Math.sin(a*Math.PI)*18;
+      const gx2=player.x+43;
+      const gy2=player.y-2-lift;
+      drawGirl(gx2,gy2,.82);
+      // ذراعان ماسكان البنت بشكل لطيف
+      ctx.strokeStyle='#ffd7e8';ctx.lineWidth=7;ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(player.x+27,player.y+25);ctx.lineTo(gx2-10,gy2+8);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(player.x+28,player.y+31);ctx.lineTo(gx2+5,gy2+12);ctx.stroke();
+    }
     particles.forEach(p=>{ctx.globalAlpha=1-p.t/.8;drawHeart(p.x,p.y-p.t*55,8);ctx.globalAlpha=1;});
-    ctx.fillStyle='rgba(255,255,255,.85)';ctx.font='bold 18px sans-serif';ctx.textAlign='center';ctx.fillText('اجمعي القلوب وروحي للبنت 💗',W/2,32);
+    ctx.fillStyle='rgba(255,255,255,.85)';ctx.font='bold 18px sans-serif';ctx.textAlign='center';ctx.fillText(carryAnim.active?'هوصلك مهما حصل يا حبيبتي ❤️':'اجمعي القلوب وروحي للبنت 💗',W/2,32);
+  }
+  function drawBoy(x,y,scale){
+    ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);
+    ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(17,42,15,4,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#f2c7ad';ctx.beginPath();ctx.arc(17,11,12,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#3a2945';ctx.beginPath();ctx.arc(17,9,12,Math.PI,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#5b7cff';ctx.fillRect(5,22,24,18);
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(12,10,2.2,0,Math.PI*2);ctx.arc(22,10,2.2,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#3a2945';ctx.beginPath();ctx.arc(12,10,.9,0,Math.PI*2);ctx.arc(22,10,.9,0,Math.PI*2);ctx.fill();
+    ctx.restore();
+  }
+  function drawGirl(x,y,scale){
+    ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);
+    ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(0,4,17,5,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#5b2f4f';ctx.beginPath();ctx.arc(0,-25,15,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#ffd9c7';ctx.beginPath();ctx.arc(0,-27,11,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#5b2f4f';ctx.fillRect(-13,-30,5,22);ctx.fillRect(8,-30,5,22);
+    ctx.fillStyle='#ff77b7';ctx.beginPath();ctx.moveTo(-10,-15);ctx.lineTo(10,-15);ctx.lineTo(15,2);ctx.lineTo(-15,2);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#4a315e';ctx.beginPath();ctx.arc(-4,-28,1.3,0,Math.PI*2);ctx.arc(4,-28,1.3,0,Math.PI*2);ctx.fill();
+    ctx.restore();
   }
   function drawHeart(x,y,s){ctx.save();ctx.translate(x,y);ctx.rotate(-.15);ctx.fillStyle='#ff6fae';ctx.beginPath();ctx.moveTo(0,s*.9);ctx.bezierCurveTo(-s*1.5,-s*.1,-s*.9,-s*1.1,0,-s*.45);ctx.bezierCurveTo(s*.9,-s*1.1,s*1.5,-s*.1,0,s*.9);ctx.fill();ctx.restore();}
   function loop(t){if(!running)return;const dt=Math.min(.032,(t-last)/1000);last=t;update(dt);draw();requestAnimationFrame(loop);}
