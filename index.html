@@ -162,12 +162,15 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
 .storySection{max-width:900px;margin:28px auto 10px;padding:20px 18px;direction:rtl;text-align:center}
 .storyBox{padding:26px 20px;border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(120,90,180,.12));border:1px solid rgba(255,255,255,.16);box-shadow:0 15px 45px rgba(0,0,0,.16);backdrop-filter:blur(10px)}
 .storyIcon{font-size:44px;margin-bottom:5px}.storyBox h2{margin:5px 0 8px}.storyBox p{opacity:.86;margin:0 0 16px;line-height:1.8}.storyOpenBtn{border:0;cursor:pointer;font:inherit;font-weight:700;padding:13px 26px;border-radius:999px;background:linear-gradient(135deg,#8f63ff,#ff5fa2);color:#fff;box-shadow:0 8px 22px rgba(120,90,180,.25)}
-.storyOpenBtn:disabled{opacity:.55;cursor:not-allowed}.storyTimer{margin-top:12px;font-size:14px;opacity:.82;min-height:24px}.storyModal{position:fixed;inset:0;z-index:10001;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(12,8,25,.78);backdrop-filter:blur(8px)}
-.storyModal.show{display:flex}.storyCard{width:min(700px,100%);max-height:88vh;overflow:auto;border-radius:28px;padding:25px 22px;background:linear-gradient(160deg,#241a3a,#3a2850);color:#fff;box-shadow:0 25px 80px rgba(0,0,0,.4);text-align:right;direction:rtl}.storyCard h3{text-align:center;margin:0 0 16px;font-size:25px}.storyLines{display:grid;gap:8px}.storyLine{padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.07);line-height:1.8}.storyClose{display:block;margin:20px auto 0;border:0;border-radius:999px;padding:11px 24px;font:inherit;font-weight:700;cursor:pointer;background:#fff;color:#30213f}
+.storyOpenBtn:disabled{opacity:.55;cursor:not-allowed}.storyTimer{margin-top:12px;font-size:14px;opacity:.82;min-height:24px}.storyModal{position:fixed;inset:0;z-index:10001;display:none;align-items:center;justify-content:center;padding:18px;background:linear-gradient(180deg,rgba(2,7,22,.18),rgba(4,12,28,.38)),radial-gradient(circle at 50% 72%,rgba(88,118,160,.16),transparent 34%),rgba(2,6,18,.48);backdrop-filter:blur(4px)}
+.storyModal.show{animation:nightFade .7s ease both}@keyframes nightFade{from{opacity:0}to{opacity:1}}
+.storyModal:before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 82% 12%,rgba(235,242,255,.95) 0 7px,rgba(210,226,255,.35) 8px,transparent 70px),radial-gradient(circle at 82% 12%,rgba(205,222,255,.14),transparent 180px),radial-gradient(ellipse at 50% 92%,rgba(113,145,174,.16),transparent 42%)}
+.storyModal:after{content:'';position:absolute;left:-10%;right:-10%;bottom:-8%;height:32%;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(0,8,18,.48)),radial-gradient(ellipse at 20% 90%,rgba(16,34,48,.72),transparent 42%),radial-gradient(ellipse at 80% 90%,rgba(12,29,44,.78),transparent 44%);filter:blur(2px)}
+.storyModal.show{display:flex}.storyCard{width:min(700px,100%);max-height:88vh;overflow:auto;border-radius:28px;padding:25px 22px;background:transparent!important;color:#fff;box-shadow:none!important;text-align:right;direction:rtl}.storyCard h3{text-align:center;margin:0 0 16px;font-size:25px}.storyLines{display:grid;gap:8px}.storyLine{padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.07);line-height:1.8}.storyClose{display:block;margin:20px auto 0;border:0;border-radius:999px;padding:11px 24px;font:inherit;font-weight:700;cursor:pointer;background:rgba(255,255,255,.9);color:#30213f;box-shadow:0 8px 30px rgba(0,0,0,.25)}
 
 
 .storyBookShell{background:transparent!important;border:0!important;box-shadow:none!important;max-width:900px!important;padding:10px!important;overflow:visible!important}
-.storyBook{position:relative;width:min(820px,94vw);height:min(610px,76vh);min-height:470px;margin:auto;perspective:1800px;direction:ltr}
+.storyBook{position:relative;width:min(820px,94vw);height:min(610px,76vh);min-height:470px;margin:auto;perspective:1800px;direction:ltr;filter:drop-shadow(0 22px 55px rgba(0,0,0,.7)) drop-shadow(0 0 28px rgba(206,174,112,.12))}
 .storyCover{position:absolute;inset:0;z-index:5;border-radius:8px 22px 22px 8px;background:linear-gradient(145deg,#402a22,#6c3d2e 48%,#2b1c1a);border:3px solid rgba(225,188,125,.55);box-shadow:0 28px 65px rgba(0,0,0,.55),inset 0 0 55px rgba(255,210,150,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f9e9c8;text-align:center;cursor:pointer;transform-origin:right center;transition:transform .9s cubic-bezier(.2,.75,.2,1),opacity .5s ease;overflow:hidden}
 .storyCover:before{content:'';position:absolute;inset:14px;border:1px solid rgba(244,218,172,.4);border-radius:4px 16px 16px 4px;pointer-events:none}
 .storyCover:after{content:'';position:absolute;top:0;right:20px;width:4px;height:100%;background:linear-gradient(90deg,transparent,rgba(255,235,190,.35),transparent);opacity:.7}
@@ -178,27 +181,27 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
 .coverSub{font-family:Georgia,'Times New Roman',serif;font-size:18px;margin-top:18px;opacity:.85}
 .coverHint{position:absolute;bottom:28px;font-size:15px;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.09);border:1px solid rgba(255,235,190,.18);animation:coverHint 1.8s ease-in-out infinite}
 @keyframes coverHint{0%,100%{transform:translateX(0);opacity:.7}50%{transform:translateX(10px);opacity:1}}
-.storyPages{position:absolute;inset:0;display:flex;direction:ltr;border-radius:8px 22px 22px 8px;overflow:hidden;background:#efe4ca;box-shadow:0 28px 65px rgba(0,0,0,.5);border:3px solid #b99a68}
-.storyPage{position:relative;width:50%;height:100%;padding:34px 30px;color:#382b20;background:linear-gradient(100deg,#d8c8a6,#f7efd9 12%,#f8f0dc 88%,#d6c4a1);overflow:auto;direction:rtl;text-align:right;box-sizing:border-box}
-.storyPage.pageRight{border-left:1px solid rgba(100,70,35,.25);box-shadow:inset -16px 0 28px rgba(70,45,20,.07)}
-.storyPage.pageLeft{box-shadow:inset 16px 0 28px rgba(70,45,20,.07)}
-.storyPage:after{content:'';position:absolute;inset:18px;border:1px solid rgba(125,92,48,.18);pointer-events:none}
-.storyPage h3{color:#493522!important;font-family:Georgia,'Times New Roman',serif!important;font-size:29px!important;margin:0 0 22px!important;text-align:center!important}
+.storyPages{position:absolute;inset:0;display:flex;direction:ltr;border-radius:8px 22px 22px 8px;overflow:hidden;background:linear-gradient(145deg,#17182d,#20233d 48%,#15172a);box-shadow:0 28px 65px rgba(0,0,0,.65),inset 0 0 55px rgba(120,145,190,.06);border:3px solid rgba(154,135,184,.55)}
+.storyPage{position:relative;width:50%;height:100%;padding:34px 30px;color:#eadfc9;background:linear-gradient(100deg,#17182d,#242743 12%,#222640 88%,#15172a);overflow:auto;direction:rtl;text-align:right;box-sizing:border-box}
+.storyPage.pageRight{border-left:1px solid rgba(180,160,210,.16);box-shadow:inset -16px 0 28px rgba(0,0,0,.16)}
+.storyPage.pageLeft{box-shadow:inset 16px 0 28px rgba(0,0,0,.16)}
+.storyPage:after{content:'';position:absolute;inset:18px;border:1px solid rgba(190,170,215,.14);pointer-events:none}
+.storyPage h3{color:#f0dfbd!important;font-family:Georgia,'Times New Roman',serif!important;font-size:29px!important;margin:0 0 22px!important;text-align:center!important}
 .storyPage .storyLines{display:grid;gap:12px;position:relative;z-index:1}
-.storyPage .storyLine{background:transparent!important;padding:0 4px!important;border-radius:0!important;line-height:1.95;font-family:Georgia,'Times New Roman',serif;font-size:17px;border-bottom:1px dashed rgba(100,70,35,.12);padding-bottom:7px!important}
-.storyPage .pageNumber{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-family:Georgia,serif;color:#8b6d43;font-size:14px}
+.storyPage .storyLine{background:transparent!important;padding:0 4px!important;border-radius:0!important;line-height:1.95;font-family:Georgia,'Times New Roman',serif;font-size:17px;border-bottom:1px dashed rgba(210,190,225,.12);padding-bottom:7px!important}
+.storyPage .pageNumber{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-family:Georgia,serif;color:#b8a9cf;font-size:14px}
 .pageSwipeHint{position:absolute;bottom:38px;right:28px;font-size:13px;color:#8b6d43;opacity:.75;z-index:2;animation:coverHint 1.8s ease-in-out infinite}
-.storyBook.open .storyPages{animation:bookAppear .8s ease both}
+.storyBook:after{content:'';position:absolute;inset:4% 5%;z-index:-1;border-radius:30px;background:radial-gradient(ellipse,rgba(255,221,173,.14),transparent 62%);filter:blur(24px);pointer-events:none}.storyBook.open .storyPages{animation:bookAppear .8s ease both}
 .storyBook.pageTurn .storyPage{animation:pageTurn .55s ease both}@keyframes pageTurn{0%{transform:translateX(12px);opacity:.35}100%{transform:translateX(0);opacity:1}}
 @keyframes bookAppear{from{opacity:.2;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
 @media(max-width:700px){.storyBook{height:72vh;min-height:440px}.storyPages{display:block;overflow:hidden}.storyPage{position:absolute;inset:0;width:100%;height:100%;padding:30px 24px}.storyPage.pageLeft{transform:translateX(100%);transition:transform .65s ease}.storyBook.showSecond .storyPage.pageRight{transform:translateX(-100%);transition:transform .65s ease}.storyBook.showSecond .storyPage.pageLeft{transform:translateX(0)}.storyPage .storyLine{font-size:16px}.coverTitle{font-size:44px}}
-.storySleepLayer{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden;display:none;background:linear-gradient(180deg,#020611 0%,#07152a 34%,#123253 68%,#091522 100%)}
+.storySleepLayer{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden;display:none;background:linear-gradient(180deg,#01040d 0%,#061226 28%,#0a2140 58%,#071321 78%,#02060d 100%);transition:opacity .5s ease}
 .storySleepLayer.show{display:block}
-.storySleepLayer:before{content:'';position:absolute;inset:-8%;background:radial-gradient(circle at 72% 22%,rgba(224,236,255,.98) 0 1.8%,rgba(224,236,255,.18) 1.9%,transparent 5%),radial-gradient(ellipse at 50% 76%,rgba(132,164,188,.22),transparent 34%),linear-gradient(180deg,transparent 0 55%,rgba(2,8,15,.32) 100%);filter:blur(.2px)}
+.storySleepLayer:before{content:'';position:absolute;inset:-8%;background:radial-gradient(circle at 76% 17%,rgba(238,244,255,.98) 0 1.4%,rgba(226,237,255,.28) 1.6%,transparent 5.8%),radial-gradient(circle at 76% 17%,rgba(180,205,235,.16),transparent 13%),radial-gradient(ellipse at 50% 76%,rgba(132,164,188,.16),transparent 34%),linear-gradient(180deg,transparent 0 50%,rgba(2,8,15,.42) 100%);filter:blur(.2px)}
 .storySleepLayer:after{content:'';position:absolute;left:-10%;right:-10%;bottom:0;height:32%;background:linear-gradient(180deg,transparent,rgba(1,5,10,.75)),radial-gradient(ellipse at 18% 80%,rgba(20,37,48,.9),transparent 38%),radial-gradient(ellipse at 78% 85%,rgba(13,28,39,.95),transparent 42%);opacity:.9}
 .storyStars{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.5px),radial-gradient(circle,rgba(255,255,255,.65) 0 1px,transparent 1.5px),radial-gradient(circle,rgba(180,205,230,.5) 0 .8px,transparent 1.2px);background-size:95px 95px,145px 145px,210px 210px;background-position:10px 20px,40px 70px,70px 10px;animation:twinkle 3s ease-in-out infinite alternate}
-.storyRain{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.72}
-.storyRain .rainDrop{position:absolute;top:-12vh;width:1.5px;height:8vh;border-radius:999px;background:linear-gradient(to bottom,transparent,rgba(225,240,255,.9));transform:rotate(12deg);filter:blur(.15px);animation:realRain linear infinite;will-change:transform,opacity}
+.storyRain{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.48}
+.storyRain .rainDrop{position:absolute;top:-12vh;width:1.5px;height:7vh;border-radius:999px;background:linear-gradient(to bottom,transparent,rgba(225,240,255,.68));transform:rotate(12deg);filter:blur(.15px);animation:realRain linear infinite;will-change:transform,opacity}
 @keyframes realRain{0%{transform:translate3d(0,-12vh,0) rotate(12deg);opacity:0}8%{opacity:.75}88%{opacity:.75}100%{transform:translate3d(-12vw,120vh,0) rotate(12deg);opacity:0}}
 
 @keyframes twinkle{from{opacity:.45}to{opacity:1}} @keyframes rainMove{to{transform:translate(-45px,45px)}}
@@ -207,6 +210,27 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
 .goodnight{margin:22px 0 4px;padding:14px 12px;border-top:1px solid rgba(255,255,255,.12);font-size:17px;line-height:1.9;text-align:center;color:#f3eaff}
 @media(max-width:600px){.storySection{padding:12px}.storyCard{padding:20px 15px}.storyCard h3{font-size:21px}.storyLine{font-size:14px}}
 
+
+/* إضافات تجربة الكتاب */
+.storyBook .bookRibbon{
+  position:absolute;top:0;right:14%;width:24px;height:92px;
+  background:linear-gradient(#8f2638,#5f1322);z-index:30;
+  box-shadow:0 6px 14px #0008;clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
+  filter:drop-shadow(0 3px 4px #0007);pointer-events:none;
+}
+.storyBook .bookProgress{
+  position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  z-index:20;font:13px Georgia,serif;color:#c9b9a3;
+  background:#080d1dcc;padding:5px 11px;border:1px solid #ffffff16;border-radius:20px;
+  opacity:.9;pointer-events:none;
+}
+.storyBook.storyClosing .storyPages{
+  animation:storyDim .9s ease both;
+}
+.storyBook.storyClosing .bookRibbon{opacity:0;transition:opacity .6s ease}
+@keyframes storyDim{0%{opacity:1;filter:none}100%{opacity:.15;filter:blur(2px)}}
+.storyModal.goodnightFade .storyCard{animation:goodnightFade .9s ease both}
+@keyframes goodnightFade{from{opacity:.35;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 </style>
 
 <style>
@@ -346,6 +370,8 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
   <div id="storyModal" class="storyModal" role="dialog" aria-modal="true" aria-labelledby="storyTitle">
     <article class="storyCard storyBookShell">
       <div id="storyBook" class="storyBook">
+        <div class="bookRibbon" aria-hidden="true"></div>
+        <div id="bookProgress" class="bookProgress" aria-live="polite">١ / ١</div>
         <div id="storyCover" class="storyCover" role="button" tabindex="0" aria-label="افتحي الحكاية بالسحب لليمين">
           <div class="coverMoon">🌙</div>
           <div class="coverDecor">✦　✧　✦</div>
@@ -958,7 +984,7 @@ tick();setInterval(tick,1000);
     if(!layer || layer.dataset.ready) return;
     layer.dataset.ready='1';
     const frag=document.createDocumentFragment();
-    for(let i=0;i<85;i++){
+    for(let i=0;i<55;i++){
       const d=document.createElement('span');
       d.className='rainDrop';
       d.style.left=(Math.random()*110-5)+'%';
@@ -1011,6 +1037,8 @@ tick();setInterval(tick,1000);
     const nums=[...document.querySelectorAll('.storyPage .pageNumber')];
     if(nums[0]) nums[0].textContent=String(i+1);
     if(nums[1]) nums[1].textContent='';
+    const progress=document.getElementById('bookProgress');
+    if(progress) progress.textContent=`${i+1} / ${storyChunks.length}`;
     book.classList.remove('showSecond');
   }
   function showNextPage(){
@@ -1030,14 +1058,24 @@ tick();setInterval(tick,1000);
     }
     // آخر سحبة: اقفل الكتاب واعرض رسالة تصبح على خير على الغلاف
     storyFinished=true;
+    book.classList.add('storyClosing');
     cover.innerHTML='<div class="coverTitle">تصبحي على خير يا قلبي ❤️<br><span style="font-size:.62em;line-height:1.7;display:block;margin-top:14px">وخليكي في حضني لحد ما تنامي. 🌙</span></div>' ;
     book.classList.remove('open','showSecond');
-    setTimeout(()=>{ storyFinished=false; },900);
+    setTimeout(()=>{
+      book.classList.remove('storyClosing');
+      const progress=document.getElementById('bookProgress');
+      if(progress) progress.textContent='';
+      modal.classList.add('goodnightFade');
+      storyFinished=false;
+      setTimeout(()=>modal.classList.remove('goodnightFade'),900);
+    },900);
   }
   function prepareStory(){
     const s=stories[state.index];
     storyChunks=chunkStory(s.lines);
     storyPage=0; storyFinished=false;
+    const progress=document.getElementById('bookProgress');
+    if(progress) progress.textContent=`1 / ${storyChunks.length}`;
     cover.innerHTML='<div class="coverTitle">حدوتك<br>يا روحي ❤️</div><div class="coverHint">اسحبي لليمين عشان تفتحي الكتاب ➜</div>';
   }
   cover.addEventListener('click',showNextPage);
