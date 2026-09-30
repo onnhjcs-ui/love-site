@@ -162,8 +162,49 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
 .storySection{max-width:900px;margin:28px auto 10px;padding:20px 18px;direction:rtl;text-align:center}
 .storyBox{padding:26px 20px;border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(120,90,180,.12));border:1px solid rgba(255,255,255,.16);box-shadow:0 15px 45px rgba(0,0,0,.16);backdrop-filter:blur(10px)}
 .storyIcon{font-size:44px;margin-bottom:5px}.storyBox h2{margin:5px 0 8px}.storyBox p{opacity:.86;margin:0 0 16px;line-height:1.8}.storyOpenBtn{border:0;cursor:pointer;font:inherit;font-weight:700;padding:13px 26px;border-radius:999px;background:linear-gradient(135deg,#8f63ff,#ff5fa2);color:#fff;box-shadow:0 8px 22px rgba(120,90,180,.25)}
-.storyOpenBtn:disabled{opacity:.55;cursor:not-allowed}.storyTimer{margin-top:12px;font-size:14px;opacity:.82;min-height:24px}.storyModal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(12,8,25,.78);backdrop-filter:blur(8px)}
+.storyOpenBtn:disabled{opacity:.55;cursor:not-allowed}.storyTimer{margin-top:12px;font-size:14px;opacity:.82;min-height:24px}.storyModal{position:fixed;inset:0;z-index:10001;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(12,8,25,.78);backdrop-filter:blur(8px)}
 .storyModal.show{display:flex}.storyCard{width:min(700px,100%);max-height:88vh;overflow:auto;border-radius:28px;padding:25px 22px;background:linear-gradient(160deg,#241a3a,#3a2850);color:#fff;box-shadow:0 25px 80px rgba(0,0,0,.4);text-align:right;direction:rtl}.storyCard h3{text-align:center;margin:0 0 16px;font-size:25px}.storyLines{display:grid;gap:8px}.storyLine{padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.07);line-height:1.8}.storyClose{display:block;margin:20px auto 0;border:0;border-radius:999px;padding:11px 24px;font:inherit;font-weight:700;cursor:pointer;background:#fff;color:#30213f}
+
+
+.storyBookShell{background:transparent!important;border:0!important;box-shadow:none!important;max-width:900px!important;padding:10px!important;overflow:visible!important}
+.storyBook{position:relative;width:min(820px,94vw);height:min(610px,76vh);min-height:470px;margin:auto;perspective:1800px;direction:ltr}
+.storyCover{position:absolute;inset:0;z-index:5;border-radius:8px 22px 22px 8px;background:linear-gradient(145deg,#402a22,#6c3d2e 48%,#2b1c1a);border:3px solid rgba(225,188,125,.55);box-shadow:0 28px 65px rgba(0,0,0,.55),inset 0 0 55px rgba(255,210,150,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f9e9c8;text-align:center;cursor:pointer;transform-origin:right center;transition:transform .9s cubic-bezier(.2,.75,.2,1),opacity .5s ease;overflow:hidden}
+.storyCover:before{content:'';position:absolute;inset:14px;border:1px solid rgba(244,218,172,.4);border-radius:4px 16px 16px 4px;pointer-events:none}
+.storyCover:after{content:'';position:absolute;top:0;right:20px;width:4px;height:100%;background:linear-gradient(90deg,transparent,rgba(255,235,190,.35),transparent);opacity:.7}
+.storyBook.open .storyCover{transform:rotateY(-115deg);opacity:0;pointer-events:none}
+.coverMoon{font-size:54px;filter:drop-shadow(0 0 14px rgba(255,240,190,.45));margin-bottom:12px}
+.coverDecor{font-size:18px;letter-spacing:4px;opacity:.8;margin-bottom:18px}
+.coverTitle{font-family:Georgia,'Times New Roman',serif;font-size:clamp(38px,7vw,64px);font-weight:800;line-height:1.2;text-shadow:0 3px 18px rgba(0,0,0,.35)}
+.coverSub{font-family:Georgia,'Times New Roman',serif;font-size:18px;margin-top:18px;opacity:.85}
+.coverHint{position:absolute;bottom:28px;font-size:15px;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.09);border:1px solid rgba(255,235,190,.18);animation:coverHint 1.8s ease-in-out infinite}
+@keyframes coverHint{0%,100%{transform:translateX(0);opacity:.7}50%{transform:translateX(10px);opacity:1}}
+.storyPages{position:absolute;inset:0;display:flex;direction:ltr;border-radius:8px 22px 22px 8px;overflow:hidden;background:#efe4ca;box-shadow:0 28px 65px rgba(0,0,0,.5);border:3px solid #b99a68}
+.storyPage{position:relative;width:50%;height:100%;padding:34px 30px;color:#382b20;background:linear-gradient(100deg,#d8c8a6,#f7efd9 12%,#f8f0dc 88%,#d6c4a1);overflow:auto;direction:rtl;text-align:right;box-sizing:border-box}
+.storyPage.pageRight{border-left:1px solid rgba(100,70,35,.25);box-shadow:inset -16px 0 28px rgba(70,45,20,.07)}
+.storyPage.pageLeft{box-shadow:inset 16px 0 28px rgba(70,45,20,.07)}
+.storyPage:after{content:'';position:absolute;inset:18px;border:1px solid rgba(125,92,48,.18);pointer-events:none}
+.storyPage h3{color:#493522!important;font-family:Georgia,'Times New Roman',serif!important;font-size:29px!important;margin:0 0 22px!important;text-align:center!important}
+.storyPage .storyLines{display:grid;gap:12px;position:relative;z-index:1}
+.storyPage .storyLine{background:transparent!important;padding:0 4px!important;border-radius:0!important;line-height:1.95;font-family:Georgia,'Times New Roman',serif;font-size:17px;border-bottom:1px dashed rgba(100,70,35,.12);padding-bottom:7px!important}
+.storyPage .pageNumber{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-family:Georgia,serif;color:#8b6d43;font-size:14px}
+.pageSwipeHint{position:absolute;bottom:38px;right:28px;font-size:13px;color:#8b6d43;opacity:.75;z-index:2;animation:coverHint 1.8s ease-in-out infinite}
+.storyBook.open .storyPages{animation:bookAppear .8s ease both}
+.storyBook.pageTurn .storyPage{animation:pageTurn .55s ease both}@keyframes pageTurn{0%{transform:translateX(12px);opacity:.35}100%{transform:translateX(0);opacity:1}}
+@keyframes bookAppear{from{opacity:.2;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@media(max-width:700px){.storyBook{height:72vh;min-height:440px}.storyPages{display:block;overflow:hidden}.storyPage{position:absolute;inset:0;width:100%;height:100%;padding:30px 24px}.storyPage.pageLeft{transform:translateX(100%);transition:transform .65s ease}.storyBook.showSecond .storyPage.pageRight{transform:translateX(-100%);transition:transform .65s ease}.storyBook.showSecond .storyPage.pageLeft{transform:translateX(0)}.storyPage .storyLine{font-size:16px}.coverTitle{font-size:44px}}
+.storySleepLayer{position:fixed;inset:0;z-index:9990;pointer-events:none;overflow:hidden;display:none;background:linear-gradient(180deg,#020611 0%,#07152a 34%,#123253 68%,#091522 100%)}
+.storySleepLayer.show{display:block}
+.storySleepLayer:before{content:'';position:absolute;inset:-8%;background:radial-gradient(circle at 72% 22%,rgba(224,236,255,.98) 0 1.8%,rgba(224,236,255,.18) 1.9%,transparent 5%),radial-gradient(ellipse at 50% 76%,rgba(132,164,188,.22),transparent 34%),linear-gradient(180deg,transparent 0 55%,rgba(2,8,15,.32) 100%);filter:blur(.2px)}
+.storySleepLayer:after{content:'';position:absolute;left:-10%;right:-10%;bottom:0;height:32%;background:linear-gradient(180deg,transparent,rgba(1,5,10,.75)),radial-gradient(ellipse at 18% 80%,rgba(20,37,48,.9),transparent 38%),radial-gradient(ellipse at 78% 85%,rgba(13,28,39,.95),transparent 42%);opacity:.9}
+.storyStars{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.5px),radial-gradient(circle,rgba(255,255,255,.65) 0 1px,transparent 1.5px),radial-gradient(circle,rgba(180,205,230,.5) 0 .8px,transparent 1.2px);background-size:95px 95px,145px 145px,210px 210px;background-position:10px 20px,40px 70px,70px 10px;animation:twinkle 3s ease-in-out infinite alternate}
+.storyRain{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.72}
+.storyRain .rainDrop{position:absolute;top:-12vh;width:1.5px;height:8vh;border-radius:999px;background:linear-gradient(to bottom,transparent,rgba(225,240,255,.9));transform:rotate(12deg);filter:blur(.15px);animation:realRain linear infinite;will-change:transform,opacity}
+@keyframes realRain{0%{transform:translate3d(0,-12vh,0) rotate(12deg);opacity:0}8%{opacity:.75}88%{opacity:.75}100%{transform:translate3d(-12vw,120vh,0) rotate(12deg);opacity:0}}
+
+@keyframes twinkle{from{opacity:.45}to{opacity:1}} @keyframes rainMove{to{transform:translate(-45px,45px)}}
+.storyCard{position:relative;background:linear-gradient(145deg,#202743,#30234a 55%,#211b35);border:1px solid rgba(255,255,255,.16);box-shadow:0 25px 90px rgba(0,0,0,.55),inset 0 0 35px rgba(255,255,255,.03)}
+.storyCard:before{content:'✦';position:absolute;left:18px;top:12px;opacity:.5;font-size:20px}.storyCard:after{content:'✦';position:absolute;right:18px;top:12px;opacity:.5;font-size:20px}
+.goodnight{margin:22px 0 4px;padding:14px 12px;border-top:1px solid rgba(255,255,255,.12);font-size:17px;line-height:1.9;text-align:center;color:#f3eaff}
 @media(max-width:600px){.storySection{padding:12px}.storyCard{padding:20px 15px}.storyCard h3{font-size:21px}.storyLine{font-size:14px}}
 
 </style>
@@ -301,10 +342,31 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
     </div>
   </section>
 
+  <div id="storySleepLayer" class="storySleepLayer" aria-hidden="true"><div class="storyStars"></div><div class="storyRain"></div></div>
   <div id="storyModal" class="storyModal" role="dialog" aria-modal="true" aria-labelledby="storyTitle">
-    <article class="storyCard">
-      <h3 id="storyTitle"></h3>
-      <div id="storyLines" class="storyLines"></div>
+    <article class="storyCard storyBookShell">
+      <div id="storyBook" class="storyBook">
+        <div id="storyCover" class="storyCover" role="button" tabindex="0" aria-label="افتحي الحكاية بالسحب لليمين">
+          <div class="coverMoon">🌙</div>
+          <div class="coverDecor">✦　✧　✦</div>
+          <div class="coverTitle">حدوتك<br>يا روحي ❤️</div>
+          <div class="coverSub">حكاية قبل النوم</div>
+          <div class="coverHint">حركي الصفحة لليمين ➜</div>
+        </div>
+        <div id="storyPages" class="storyPages">
+          <div class="storyPage pageRight">
+            <div class="pageNumber">١</div>
+            <h3 id="storyTitle"></h3>
+            <div id="storyLines" class="storyLines"></div>
+            <div class="pageSwipeHint">اسحبي لليمين للصفحة التالية ➜</div>
+          </div>
+          <div class="storyPage pageLeft">
+            <div class="pageNumber">٢</div>
+            <div id="storyLines2" class="storyLines"></div>
+            <div class="goodnight">تصبحي على خير يا قلبي ❤️<br>وخليكي في حضني لحد ما تنامي. 🌙</div>
+          </div>
+        </div>
+      </div>
       <button id="closeStoryBtn" class="storyClose" type="button">خرجت من الحكاية 🌙</button>
     </article>
   </div>
@@ -877,35 +939,115 @@ tick();setInterval(tick,1000);
   ];
 
   const btn=document.getElementById('openStoryBtn'), close=document.getElementById('closeStoryBtn'), modal=document.getElementById('storyModal');
-  const title=document.getElementById('storyTitle'), lines=document.getElementById('storyLines'), status=document.getElementById('storyStatus'), timer=document.getElementById('storyTimer');
-  const KEY='bedtime_story_state_v1';
-  const FIVE_HOURS=5*60*60*1000;
-  let state={index:0,unlockAt:0};
+  const title=document.getElementById('storyTitle'), lines=document.getElementById('storyLines'), lines2=document.getElementById('storyLines2'), status=document.getElementById('storyStatus'), timer=document.getElementById('storyTimer');
+  const book=document.getElementById('storyBook'), cover=document.getElementById('storyCover');
+  const sleepLayer=document.getElementById('storySleepLayer');
+  const song=document.getElementById('loveSong');
+  const KEY='bedtime_story_state_v3';
+  let state={index:0};
   try{ const saved=JSON.parse(localStorage.getItem(KEY)||'null'); if(saved&&Number.isInteger(saved.index)&&saved.index>=0) state=saved; }catch(e){}
   state.index=Math.min(state.index,stories.length-1);
-
   function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
-  function remaining(){return Math.max(0,(state.unlockAt||0)-Date.now());}
-  function fmt(ms){let sec=Math.ceil(ms/1000),h=Math.floor(sec/3600);sec%=3600;let m=Math.floor(sec/60);sec%=60;return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;}
   function render(){
-    const left=remaining();
-    if(left<=0){btn.disabled=false;btn.textContent='فتح الحكاية 📖';status.textContent=`الحكاية رقم ${state.index+1} جاهزة للقراءة.`;timer.textContent='حكاية جديدة مستنياكي 🌙';}
-    else{btn.disabled=true;btn.textContent='الحكاية الجاية لسه بتتحضر…';status.textContent='خلصتي الحكاية الأخيرة، والحكاية الجديدة هتفتح بعد 5 ساعات.';timer.textContent='الوقت المتبقي: '+fmt(left);}
+    btn.disabled=false; btn.textContent='فتح الحكاية 📖';
+    status.textContent=`الحكاية رقم ${state.index+1} جاهزة للقراءة.`;
+    timer.textContent='كل ما تخلصي حكاية، الحكاية اللي بعدها مستنياكي فورًا 🌙';
+  }
+  function makeRealRain(){
+    const layer=document.querySelector('.storyRain');
+    if(!layer || layer.dataset.ready) return;
+    layer.dataset.ready='1';
+    const frag=document.createDocumentFragment();
+    for(let i=0;i<85;i++){
+      const d=document.createElement('span');
+      d.className='rainDrop';
+      d.style.left=(Math.random()*110-5)+'%';
+      d.style.height=(4+Math.random()*7)+'vh';
+      d.style.opacity=(.35+Math.random()*.5).toFixed(2);
+      d.style.animationDuration=(.65+Math.random()*.75).toFixed(2)+'s';
+      d.style.animationDelay=(-Math.random()*1.5).toFixed(2)+'s';
+      d.style.transform='rotate('+(9+Math.random()*8).toFixed(1)+'deg)';
+      frag.appendChild(d);
+    }
+    layer.appendChild(frag);
   }
   function openStory(){
-    if(remaining()>0)return;
-    const s=stories[state.index]; title.textContent=s.title; lines.innerHTML=s.lines.map(x=>`<div class="storyLine">${x}</div>`).join(''); modal.classList.add('show');
+    makeRealRain();
+    const s=stories[state.index];
+    if(song && !song.paused) song.pause();
+    sleepLayer.classList.add('show');
+    document.body.classList.add('storySleep');
+    title.textContent=s.title;
+    storyChunks=chunkStory(s.lines);
+    storyPage=0; storyFinished=false;
+    lines.innerHTML=''; lines2.innerHTML='';
+    cover.innerHTML='<div class="coverTitle">حدوتك<br>يا روحي ❤️</div><div class="coverHint">اسحبي لليمين عشان تفتحي الكتاب ➜</div>';
+    book.classList.remove('showSecond','open','pageTurn');
+    modal.classList.add('show');
   }
   function closeStory(){
     modal.classList.remove('show');
+    book.classList.remove('showSecond','open');
+    sleepLayer.classList.remove('show');
+    document.body.classList.remove('storySleep');
+    if(song){ song.play().catch(()=>{}); }
     state.index=(state.index+1)%stories.length;
-    state.unlockAt=Date.now()+FIVE_HOURS;
     save(); render();
   }
+  let touchStartX=0, touchStartY=0;
+  let storyChunks=[];
+  let storyPage=0;
+  let storyFinished=false;
+  function chunkStory(linesArr){
+    const n=3; const out=[];
+    for(let i=0;i<linesArr.length;i+=n) out.push(linesArr.slice(i,i+n));
+    return out.length?out:[[]];
+  }
+  function paintPage(i){
+    const chunk=storyChunks[i]||[];
+    title.textContent=storyPage===0?stories[state.index].title:'';
+    lines.innerHTML=chunk.map(x=>`<div class="storyLine">${x}</div>`).join('');
+    lines2.innerHTML='';
+    const nums=[...document.querySelectorAll('.storyPage .pageNumber')];
+    if(nums[0]) nums[0].textContent=String(i+1);
+    if(nums[1]) nums[1].textContent='';
+    book.classList.remove('showSecond');
+  }
+  function showNextPage(){
+    if(storyFinished) return;
+    if(!book.classList.contains('open')){
+      book.classList.add('open');
+      storyPage=0;
+      paintPage(0);
+      return;
+    }
+    if(storyPage < storyChunks.length-1){
+      storyPage++;
+      paintPage(storyPage);
+      book.classList.add('pageTurn');
+      setTimeout(()=>book.classList.remove('pageTurn'),650);
+      return;
+    }
+    // آخر سحبة: اقفل الكتاب واعرض رسالة تصبح على خير على الغلاف
+    storyFinished=true;
+    cover.innerHTML='<div class="coverTitle">تصبحي على خير يا قلبي ❤️<br><span style="font-size:.62em;line-height:1.7;display:block;margin-top:14px">وخليكي في حضني لحد ما تنامي. 🌙</span></div>' ;
+    book.classList.remove('open','showSecond');
+    setTimeout(()=>{ storyFinished=false; },900);
+  }
+  function prepareStory(){
+    const s=stories[state.index];
+    storyChunks=chunkStory(s.lines);
+    storyPage=0; storyFinished=false;
+    cover.innerHTML='<div class="coverTitle">حدوتك<br>يا روحي ❤️</div><div class="coverHint">اسحبي لليمين عشان تفتحي الكتاب ➜</div>';
+  }
+  cover.addEventListener('click',showNextPage);
+  cover.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showNextPage();}});
+  book.addEventListener('touchstart',e=>{const t=e.changedTouches[0];touchStartX=t.clientX;touchStartY=t.clientY;},{passive:true});
+  book.addEventListener('touchend',e=>{const t=e.changedTouches[0];const dx=t.clientX-touchStartX, dy=t.clientY-touchStartY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)){if(dx>0) showNextPage();}}, {passive:true});
   btn.addEventListener('click',openStory); close.addEventListener('click',closeStory);
   modal.addEventListener('click',e=>{if(e.target===modal)closeStory();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show'))closeStory();});
-  render(); setInterval(render,1000);
+  render();
 })();
 </script>
 
