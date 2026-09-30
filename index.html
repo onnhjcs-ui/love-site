@@ -157,6 +157,15 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
 
 /* إزالة الزهور وكلمات بحبك من الصفحة */
 .bgFlower,.loveWord,#flowerOverlay{display:none !important;}
+
+/* حكايات قبل النوم */
+.storySection{max-width:900px;margin:28px auto 10px;padding:20px 18px;direction:rtl;text-align:center}
+.storyBox{padding:26px 20px;border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(120,90,180,.12));border:1px solid rgba(255,255,255,.16);box-shadow:0 15px 45px rgba(0,0,0,.16);backdrop-filter:blur(10px)}
+.storyIcon{font-size:44px;margin-bottom:5px}.storyBox h2{margin:5px 0 8px}.storyBox p{opacity:.86;margin:0 0 16px;line-height:1.8}.storyOpenBtn{border:0;cursor:pointer;font:inherit;font-weight:700;padding:13px 26px;border-radius:999px;background:linear-gradient(135deg,#8f63ff,#ff5fa2);color:#fff;box-shadow:0 8px 22px rgba(120,90,180,.25)}
+.storyOpenBtn:disabled{opacity:.55;cursor:not-allowed}.storyTimer{margin-top:12px;font-size:14px;opacity:.82;min-height:24px}.storyModal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(12,8,25,.78);backdrop-filter:blur(8px)}
+.storyModal.show{display:flex}.storyCard{width:min(700px,100%);max-height:88vh;overflow:auto;border-radius:28px;padding:25px 22px;background:linear-gradient(160deg,#241a3a,#3a2850);color:#fff;box-shadow:0 25px 80px rgba(0,0,0,.4);text-align:right;direction:rtl}.storyCard h3{text-align:center;margin:0 0 16px;font-size:25px}.storyLines{display:grid;gap:8px}.storyLine{padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.07);line-height:1.8}.storyClose{display:block;margin:20px auto 0;border:0;border-radius:999px;padding:11px 24px;font:inherit;font-weight:700;cursor:pointer;background:#fff;color:#30213f}
+@media(max-width:600px){.storySection{padding:12px}.storyCard{padding:20px 15px}.storyCard h3{font-size:21px}.storyLine{font-size:14px}}
+
 </style>
 
 <style>
@@ -280,6 +289,25 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
   </section>
 
 
+
+
+  <section class="storySection" aria-label="حكاية قبل النوم">
+    <div class="storyBox">
+      <div class="storyIcon">📖🌙</div>
+      <h2>حكاية قبل النوم</h2>
+      <p id="storyStatus">في حكاية جديدة مستنياكي النهارده.</p>
+      <button id="openStoryBtn" class="storyOpenBtn" type="button">فتح الحكاية 📖</button>
+      <div id="storyTimer" class="storyTimer" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <div id="storyModal" class="storyModal" role="dialog" aria-modal="true" aria-labelledby="storyTitle">
+    <article class="storyCard">
+      <h3 id="storyTitle"></h3>
+      <div id="storyLines" class="storyLines"></div>
+      <button id="closeStoryBtn" class="storyClose" type="button">خرجت من الحكاية 🌙</button>
+    </article>
+  </div>
 
   <section class="gameInvite">
     <div class="gameInviteBox">
@@ -731,6 +759,155 @@ tick();setInterval(tick,1000);
 })();
 </script>
 
+
+
+<script>
+(function(){
+  const stories = [
+    {title:'الساعة التي توقفت', lines:[
+      'في قرية صغيرة كانت هناك ساعة قديمة فوق برج حجري.',
+      'توقفت الساعة كل ليلة عند الثانية عشرة تمامًا.',
+      'حاول أهل القرية إصلاحها، لكنها كانت تعود للتوقف من جديد.',
+      'في ليلة هادئة صعد طفل اسمه يونس إلى البرج ليستكشف الأمر.',
+      'وجد خلف الساعة صندوقًا خشبيًا صغيرًا مليئًا برسائل قديمة.',
+      'كانت الرسائل تحكي عن أناس مروا من القرية وتركوا أمنياتهم.',
+      'قرأ يونس آخر رسالة، فوجد أنها تطلب من أي شخص العثور عليها أن يكتب أمنية جديدة.',
+      'كتب يونس أمنية صغيرة: أن يظل أهل القرية متعاونين مهما تغيرت الأيام.',
+      'وضع الرسالة في الصندوق وأغلقه، وفجأة بدأت عقارب الساعة تتحرك.',
+      'ومنذ تلك الليلة لم تتوقف الساعة، وبقي الصندوق سرًا لا يعرفه إلا يونس.' ]},
+    {title:'مصباح البحر', lines:[
+      'كان على شاطئ بعيد مصباح صغير يضيء كل ليلة وحده.',
+      'لم يكن أحد يعرف من يشعله، حتى بدأ الناس يلاحظون ضوءًا ثانيًا في البحر.',
+      'خرج الصبي سامر بقاربه ليرى ما يحدث من بعيد.',
+      'وجد جزيرة صغيرة لم تكن موجودة على الخرائط القديمة.',
+      'وفي وسط الجزيرة كان هناك مصباح أكبر يضيء الطريق بين الصخور.',
+      'اكتشف سامر أن الضوء يقود القوارب بعيدًا عن منطقة مليئة بالصخور.',
+      'عاد إلى القرية وأخبر الجميع، فبدأوا يضعون علامات مضيئة على الشاطئ.',
+      'صار البحارة يعرفون الطريق الآمن حتى في الليالي المظلمة.',
+      'أما المصباح الصغير فظل مضيئًا كل ليلة كما كان.',
+      'وظل أهل القرية يقولون إن البحر أحيانًا يحرس من يعرف كيف يصغي إليه.' ]},
+    {title:'مدينة الورق', lines:[
+      'في صباح غريب وجد كريم ورقة بيضاء على عتبة منزله.',
+      'عندما طواها على شكل طائرة، ظهرت عليها خريطة لمدينة لم يرها من قبل.',
+      'تبع الخريطة حتى وصل إلى شارع ضيق مليء بمبانٍ مصنوعة من الورق.',
+      'كانت المدينة تتحرك كلما هبت الريح، وكأنها لعبة ضخمة.',
+      'قابل هناك امرأة عجوزًا تحرس مكتبة صغيرة من الورق.',
+      'قالت له إن المدينة ستختفي عند غروب الشمس إذا لم تجد قصتها المفقودة.',
+      'بحث كريم بين الكتب حتى وجد صفحة بلا عنوان.',
+      'كانت الصفحة تحكي عن طفل بنى المدينة لأنه كان يخاف أن ينسى أحلامه.',
+      'أعاد كريم الصفحة إلى الكتاب، فعادت كل المباني إلى أماكنها.',
+      'وعندما عاد إلى بيته وجد الخريطة قد تحولت إلى طائرة ورقية عادية.' ]},
+    {title:'الطائر الذي نسي الطريق', lines:[
+      'كان طائر صغير يطير كل صباح فوق الغابة ثم يعود إلى عشه قبل الغروب.',
+      'وفي يوم عاصف ابتعد كثيرًا حتى لم يعد يعرف طريق العودة.',
+      'هبط قرب شجرة عالية وسأل السنجاب عن الطريق.',
+      'قال السنجاب إن النهر يقود إلى التلال، والتلال تقود إلى الأشجار القديمة.',
+      'تابع الطائر رحلته، لكنه وجد الضباب يغطي كل شيء.',
+      'سمع صوت ماء قريب، فبدأ يتبع صوت النهر ببطء.',
+      'مع كل خطوة كان يتذكر علامة جديدة من الطريق الذي قطعه صباحًا.',
+      'وأخيرًا رأى شجرته العالية من بعيد.',
+      'عاد إلى عشه قبل أن تظهر النجوم، ووجد عائلته تنتظره.',
+      'ومنذ ذلك اليوم صار يحفظ الطريق بعلاماته بدل أن يعتمد على ذاكرته وحدها.' ]},
+    {title:'المفتاح الأزرق', lines:[
+      'وجدت ليلى مفتاحًا أزرق صغيرًا داخل كتاب قديم في مكتبة المدرسة.',
+      'لم يكن للمفتاح قفل معروف، فاحتفظت به في جيبها.',
+      'بعد أيام لاحظت بابًا صغيرًا خلف رف الكتب لم تكن قد رأته من قبل.',
+      'جربت المفتاح، فانفتح الباب على غرفة مليئة بخرائط ودفاتر.',
+      'كان كل دفتر يحمل اسمًا وتاريخًا وملاحظة عن شيء اكتشفه صاحبه.',
+      'فهمت ليلى أن الغرفة كانت سجلًا للمستكشفين الصغار في المدينة.',
+      'وجدت دفترًا فارغًا باسمها، وكأنه كان ينتظرها.',
+      'كتبت فيه أول اكتشاف لها: أن الفضول يمكن أن يفتح أبوابًا غير متوقعة.',
+      'أغلقت الغرفة وأعادت المفتاح إلى مكانه.',
+      'وفي اليوم التالي اختفى الباب، لكن دفترها بقي معها.' ]},
+    {title:'القطار الذي لا يظهر في الخريطة', lines:[
+      'كان هناك قطار يصل إلى المحطة الأخيرة بعد منتصف الليل بدقائق.',
+      'الغريب أن اسمه لم يكن موجودًا على أي جدول للقطارات.',
+      'ركبته مريم مرة بدافع الفضول، فوجدت العربات هادئة والنوافذ تطل على نجوم كثيرة.',
+      'سألها السائق عن المكان الذي تريد الوصول إليه.',
+      'قالت إنها لا تعرف، فضحك وقال إن بعض الرحلات تبدأ قبل أن نعرف وجهتها.',
+      'مر القطار بقرى صغيرة ومزارع مضيئة ثم دخل نفقًا طويلًا.',
+      'خرج من النفق أمام محطة لم ترها مريم من قبل.',
+      'وجدت هناك صندوقًا به صور لأماكن من مدينتها القديمة.',
+      'عادت في القطار نفسه، وفي يدها صورة واحدة لا تعرف متى التقطت.',
+      'ومنذ ذلك الوقت كانت تزور المحطة أحيانًا، لكن القطار لم يظهر لها مرة أخرى.' ]},
+    {title:'حارس الغابة', lines:[
+      'في طرف الغابة كان يعيش حارس عجوز يعرف أسماء الأشجار كلها.',
+      'ذات يوم لاحظ أن نبعًا صغيرًا بدأ يجف رغم أن المطر كان كثيرًا.',
+      'تتبع مجرى الماء حتى وجد أغصانًا وحجارة تسد طريقه.',
+      'بدأ بإزالة العوائق، لكن بعضها كان أثقل من أن يحركه وحده.',
+      'وصلت مجموعة من الأطفال وساعدوه في تنظيف المجرى.',
+      'بعد ساعات عاد الماء يجري بين الحجارة من جديد.',
+      'أخذ الحارس الأطفال إلى أعلى التل وأراهم الغابة من بعيد.',
+      'قال إن الغابة لا تحتاج بطلًا واحدًا، بل تحتاج أشخاصًا يهتمون بها كل يوم.',
+      'وضع الأطفال علامة صغيرة قرب النبع حتى لا ينسوا المكان.',
+      'وبعد سنوات بقيت العلامة هناك، وصار النبع من أنظف أماكن الغابة.' ]},
+    {title:'النجمة الصغيرة', lines:[
+      'كانت نجمة صغيرة تشعر أنها أضعف من باقي النجوم في السماء.',
+      'كل ليلة كانت تختبئ خلف سحابة حتى لا يلاحظ أحد ضوءها الخافت.',
+      'في ليلة شديدة الظلام اختفت النجوم الكبيرة خلف الغيوم.',
+      'بقي ضوء النجمة الصغيرة ظاهرًا فوق طريق جبلي.',
+      'رآه مسافر ضل طريقه، فاتبع الضوء حتى وصل إلى كوخ آمن.',
+      'في الصباح اختفت السحب وعادت النجوم الكبيرة للظهور.',
+      'لكن النجمة الصغيرة لم تعد تخجل من ضوئها.',
+      'فهمت أن قيمة الضوء ليست في حجمه، بل في الوقت الذي يحتاجه فيه أحد.',
+      'ومنذ ذلك اليوم كانت تضيء مكانها كل ليلة دون أن تقارن نفسها بغيرها.',
+      'وبقي المسافر يتذكر النجمة الصغيرة كلما نظر إلى السماء.' ]},
+    {title:'الباب في آخر الممر', lines:[
+      'في بيت قديم كان هناك ممر طويل ينتهي بباب أخضر.',
+      'لم يفتحه أحد منذ سنوات لأن المفتاح ضاع منذ زمن بعيد.',
+      'ذات صباح وجد آدم المفتاح داخل صندوق أدوات قديم.',
+      'فتح الباب فوجد حديقة صغيرة مليئة بأشجار الفاكهة البرية.',
+      'في منتصف الحديقة كانت هناك لافتة تقول: ازرع شيئًا واتركه لمن يأتي بعدك.',
+      'اختار آدم بذرة من شجرة صغيرة وزرعها قرب السور.',
+      'سقاها كل يوم، وبعد أسابيع بدأت أول ورقة تظهر.',
+      'مرت السنوات وكبرت الشجرة حتى صار ظلها يغطي نصف الحديقة.',
+      'وضع آدم مقعدًا تحتها وترك الباب مفتوحًا للجيران.',
+      'صار المكان حديقة هادئة يجلس فيها كل من يحتاج إلى بعض الراحة.' ]},
+    {title:'صندوق الغد', lines:[
+      'كان نوح يكتب كل ليلة شيئًا يتمنى أن يفعله في المستقبل.',
+      'وكان يضع الورقة في صندوق خشبي ويسميه صندوق الغد.',
+      'بعد عام فتح الصندوق ليكتشف كم تغيرت أفكاره.',
+      'وجد أمنيات كبيرة وأخرى بسيطة، وبعضها لم يعد يريده أصلًا.',
+      'لكنه لاحظ أن كل ورقة كانت تذكره بشيء تعلمه في ذلك الوقت.',
+      'قرر أن يكتب أمنية جديدة لا تتعلق بالوصول إلى مكان معين.',
+      'كتب: أريد أن أظل أتعلم شيئًا جديدًا مهما كان صغيرًا.',
+      'وضع الورقة في الصندوق وأغلقه.',
+      'بعدها صار كل شهر يفتح الصندوق ويضيف ورقة جديدة.',
+      'وبمرور الوقت أصبح الصندوق سجلًا صغيرًا لحياة مليئة بالتجارب.' ]}
+  ];
+
+  const btn=document.getElementById('openStoryBtn'), close=document.getElementById('closeStoryBtn'), modal=document.getElementById('storyModal');
+  const title=document.getElementById('storyTitle'), lines=document.getElementById('storyLines'), status=document.getElementById('storyStatus'), timer=document.getElementById('storyTimer');
+  const KEY='bedtime_story_state_v1';
+  const FIVE_HOURS=5*60*60*1000;
+  let state={index:0,unlockAt:0};
+  try{ const saved=JSON.parse(localStorage.getItem(KEY)||'null'); if(saved&&Number.isInteger(saved.index)&&saved.index>=0) state=saved; }catch(e){}
+  state.index=Math.min(state.index,stories.length-1);
+
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function remaining(){return Math.max(0,(state.unlockAt||0)-Date.now());}
+  function fmt(ms){let sec=Math.ceil(ms/1000),h=Math.floor(sec/3600);sec%=3600;let m=Math.floor(sec/60);sec%=60;return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;}
+  function render(){
+    const left=remaining();
+    if(left<=0){btn.disabled=false;btn.textContent='فتح الحكاية 📖';status.textContent=`الحكاية رقم ${state.index+1} جاهزة للقراءة.`;timer.textContent='حكاية جديدة مستنياكي 🌙';}
+    else{btn.disabled=true;btn.textContent='الحكاية الجاية لسه بتتحضر…';status.textContent='خلصتي الحكاية الأخيرة، والحكاية الجديدة هتفتح بعد 5 ساعات.';timer.textContent='الوقت المتبقي: '+fmt(left);}
+  }
+  function openStory(){
+    if(remaining()>0)return;
+    const s=stories[state.index]; title.textContent=s.title; lines.innerHTML=s.lines.map(x=>`<div class="storyLine">${x}</div>`).join(''); modal.classList.add('show');
+  }
+  function closeStory(){
+    modal.classList.remove('show');
+    state.index=(state.index+1)%stories.length;
+    state.unlockAt=Date.now()+FIVE_HOURS;
+    save(); render();
+  }
+  btn.addEventListener('click',openStory); close.addEventListener('click',closeStory);
+  modal.addEventListener('click',e=>{if(e.target===modal)closeStory();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show'))closeStory();});
+  render(); setInterval(render,1000);
+})();
+</script>
 
 </body>
 </html>
