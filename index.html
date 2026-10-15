@@ -212,12 +212,6 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
 
 
 /* إضافات تجربة الكتاب */
-.storyBook .bookRibbon{
-  position:absolute;top:0;right:14%;width:24px;height:92px;
-  background:linear-gradient(#8f2638,#5f1322);z-index:30;
-  box-shadow:0 6px 14px #0008;clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);
-  filter:drop-shadow(0 3px 4px #0007);pointer-events:none;
-}
 .storyBook .bookProgress{
   position:absolute;top:12px;left:50%;transform:translateX(-50%);
   z-index:20;font:13px Georgia,serif;color:#c9b9a3;
@@ -227,7 +221,6 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
 .storyBook.storyClosing .storyPages{
   animation:storyDim .9s ease both;
 }
-.storyBook.storyClosing .bookRibbon{opacity:0;transition:opacity .6s ease}
 @keyframes storyDim{0%{opacity:1;filter:none}100%{opacity:.15;filter:blur(2px)}}
 .storyModal.goodnightFade .storyCard{animation:goodnightFade .9s ease both}
 @keyframes goodnightFade{from{opacity:.35;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
@@ -252,6 +245,59 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
 .gameControls{display:flex;justify-content:center;gap:16px;margin:16px 0 8px}.ctrl{width:72px;height:58px;border-radius:18px;background:linear-gradient(145deg,#ff70ae,#755cff);color:#fff;font-size:27px;box-shadow:0 8px 20px rgba(0,0,0,.2)}
 .gameHint{text-align:center;font-size:13px;opacity:.7;margin:5px 0}
 @media(max-width:600px){.gameSection{padding:12px}.gameHeader{align-items:flex-start}.gameHeader h2{font-size:20px}.gameHeader p{font-size:13px}.gameCanvasWrap{border-radius:17px}.ctrl{width:64px;height:54px}.gameControls{gap:10px}}
+</style>
+
+
+<style id="jana-winter-redesign">
+:root{color-scheme:dark;--winter-ink:#f8f4ff;--winter-pink:#ffd6e8;--winter-blue:#cbe9ff;--winter-glass:rgba(24,35,65,.72)}
+html{scroll-behavior:auto!important;background:#10182c}
+body{font-family:Tahoma,Arial,sans-serif!important;color:var(--winter-ink)!important;background:radial-gradient(ellipse at 12% 8%,rgba(102,158,205,.28),transparent 36%),radial-gradient(ellipse at 88% 22%,rgba(220,155,197,.22),transparent 34%),linear-gradient(155deg,#10182c 0%,#202a48 48%,#17152e 100%)!important;background-attachment:fixed!important}
+body:before{content:"";pointer-events:none;position:fixed;inset:0;z-index:0;opacity:.42;background-image:radial-gradient(2px 2px at 8% 17%,#fff 55%,transparent 60%),radial-gradient(1.5px 1.5px at 28% 71%,#fff 55%,transparent 60%),radial-gradient(2px 2px at 69% 22%,#fff 55%,transparent 60%),radial-gradient(1px 1px at 91% 62%,#fff 55%,transparent 60%),radial-gradient(2px 2px at 48% 44%,#d9edff 55%,transparent 60%);background-size:240px 240px,190px 190px,270px 270px,220px 220px,310px 310px}
+body>*{position:relative;z-index:1}.siteFlowers{display:none!important}
+.screen.login{background:transparent!important;position:relative;isolation:isolate}
+.card,.heroBox,.section,.birthdayBox,.storyBox,.gameInviteBox{background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(177,211,255,.055))!important;border:1px solid rgba(221,239,255,.26)!important;box-shadow:0 18px 55px rgba(3,8,25,.3),inset 0 1px rgba(255,255,255,.14)!important;backdrop-filter:blur(14px)!important;border-radius:26px!important}
+.card{max-width:440px!important}.heart{filter:drop-shadow(0 0 18px rgba(255,186,221,.48))}
+h1,h2,h3,.coverTitle{color:#fff2fa!important;text-shadow:0 3px 22px rgba(158,196,255,.25)}
+.sub,.hero p,.section p,.birthdayBox p,.storyBox p{color:#e2eaff!important}
+button,.storyOpenBtn,.gameOpenBtn,.gameSmallBtn{background:linear-gradient(120deg,#ffd2e6,#c8e7ff)!important;color:#252442!important;border:1px solid rgba(255,255,255,.48)!important;box-shadow:0 8px 22px rgba(10,15,40,.2)!important;border-radius:16px!important}
+input{background:rgba(9,15,34,.68)!important;border:1px solid rgba(221,239,255,.35)!important;color:white!important;border-radius:15px!important}
+.hero,.section,.birthdaySection,.storySection,.gameInvite,.gameSection{background:transparent!important;position:relative}
+.hero{padding-top:clamp(24px,5vh,54px)!important;padding-bottom:clamp(24px,5vh,54px)!important}
+.heroBox{max-width:900px!important;margin-inline:auto!important;padding:clamp(22px,5vw,42px)!important}
+.section,.birthdaySection,.storySection,.gameInvite,.gameSection{padding:clamp(18px,4vw,36px)!important}
+.counter{color:#fff0f8!important;text-shadow:0 0 16px rgba(196,222,255,.4)}
+.storyBox{max-width:760px!important;margin-inline:auto!important;padding:clamp(22px,5vw,42px)!important}
+/* إصلاح عرض الكتاب على الموبايل وإزالة الشريط الأحمر */
+.storyModal .storyCard.storyBookShell{position:relative!important;flex-direction:column!important;gap:8px!important;}
+.storyModal .storyBook{flex:1 1 auto!important;width:min(100%,760px)!important;height:88dvh!important;max-height:88dvh!important;min-height:0!important;}
+.storyModal .storyClose{flex:0 0 auto!important;position:relative!important;align-self:center!important;margin:0 auto 2px!important;}
+@media(max-width:600px){
+ .storyModal .storyCard.storyBookShell{padding:6px!important;gap:6px!important;}
+ .storyModal .storyBook{width:100%!important;height:calc(100dvh - 72px)!important;max-height:calc(100dvh - 72px)!important;}
+}
+
+/* الحكاية تفتح على طول في مساحة شاشة الموبايل */
+.storyModal{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;padding:0!important;margin:0!important;overflow:hidden!important;align-items:stretch!important;justify-content:stretch!important;background:radial-gradient(ellipse at 50% 10%,rgba(100,137,185,.32),transparent 58%),linear-gradient(160deg,#10182c,#202b47 60%,#17162d)!important;z-index:99999!important}
+.storyModal.show{display:flex!important}
+.storyCard.storyBookShell{width:100vw!important;max-width:none!important;height:100dvh!important;max-height:100dvh!important;min-height:0!important;margin:0!important;padding:clamp(8px,2vw,18px)!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;backdrop-filter:none!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
+.storyBook{width:min(100%,760px)!important;height:min(92dvh,100%)!important;max-height:92dvh!important;min-height:0!important;margin:auto!important;position:relative!important;overflow:hidden!important;border-radius:20px!important;box-shadow:0 14px 45px rgba(0,0,0,.35)!important}
+.storyCover,.storyPage{max-height:100%!important;overflow-y:auto!important;overscroll-behavior:contain!important}
+.storyCover{background:radial-gradient(circle at 50% 20%,#526f9c 0%,#263b61 45%,#17233e 100%)!important;color:#fff!important}
+.storyPage{background:linear-gradient(145deg,#26334e,#1c2942)!important;color:#f5f0fa!important;border-color:rgba(219,232,255,.2)!important}
+.storyPage h3,.storyLines,.pageNumber,.pageSwipeHint,.coverSub,.coverHint{color:#f1eafa!important}
+.storyClose{z-index:20!important}
+body.storySleep{overflow:hidden!important}
+body.storySleep:before{opacity:.18!important}
+@media(max-width:600px){
+ .screen{min-height:100svh!important;padding:18px!important}
+ .card{padding:28px 20px!important}
+ .heroBox,.storyBox,.gameInviteBox{padding:22px 16px!important}
+ .section,.birthdaySection,.storySection,.gameInvite,.gameSection{padding:14px 12px!important}
+ .storyCard.storyBookShell{padding:6px!important}
+ .storyBook{width:100%!important;height:94dvh!important;max-height:94dvh!important;border-radius:17px!important}
+ .storyCover,.storyPage{padding:clamp(16px,5vw,26px)!important}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 
 </head>
@@ -288,6 +334,9 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
   <span class="flower" style="left:57%;top:14%;--y:10vh;--r:18deg;animation-delay:.28s">🌹</span>
   <span class="flower" style="left:81%;top:10%;--y:16vh;--r:-25deg;animation-delay:.36s">🌷</span>
 </div>
+
+
+
 <section id="login" class="screen login">
   <div class="card">
     <div class="heart">❤️</div>
@@ -365,7 +414,6 @@ footer{padding:80px 20px;text-align:center;background:#090509;font-size:20px;col
   <div id="storyModal" class="storyModal" role="dialog" aria-modal="true" aria-labelledby="storyTitle">
     <article class="storyCard storyBookShell">
       <div id="storyBook" class="storyBook">
-        <div class="bookRibbon" aria-hidden="true"></div>
         <div id="bookProgress" class="bookProgress" aria-live="polite">١ / ١</div>
         <div id="storyCover" class="storyCover" role="button" tabindex="0" aria-label="افتحي الحكاية بالسحب لليمين">
           <div class="coverMoon">🌙</div>
@@ -443,7 +491,9 @@ function unlock(){
   if(v===SECRET){
     document.getElementById("login").style.display="none";
     document.getElementById("site").style.display="block";
-window.scrollTo(0,0);
+    
+/* الموسيقى محذوفة حسب الطلب */
+    window.scrollTo(0,0);
   }else{
     document.getElementById("error").textContent="الرمز مش صحيح ❤️";
   }
@@ -958,6 +1008,7 @@ tick();setInterval(tick,1000);
   const title=document.getElementById('storyTitle'), lines=document.getElementById('storyLines'), lines2=document.getElementById('storyLines2'), status=document.getElementById('storyStatus'), timer=document.getElementById('storyTimer');
   const book=document.getElementById('storyBook'), cover=document.getElementById('storyCover');
   const sleepLayer=document.getElementById('storySleepLayer');
+  const song=document.getElementById('loveSong');
   const KEY='bedtime_story_state_v3';
   let state={index:0};
   try{ const saved=JSON.parse(localStorage.getItem(KEY)||'null'); if(saved&&Number.isInteger(saved.index)&&saved.index>=0) state=saved; }catch(e){}
@@ -987,12 +1038,9 @@ tick();setInterval(tick,1000);
     layer.appendChild(frag);
   }
   function openStory(){
-    document.body.classList.add("storyFocusMode");
-    document.documentElement.classList.add("storyFocusMode");
-    document.body.dataset.storyScrollY = String(window.scrollY || 0);
-    document.body.style.overflow = 'hidden';
+    makeRealRain();
     const s=stories[state.index];
-
+    /* لا توجد موسيقى */
     sleepLayer.classList.add('show');
     document.body.classList.add('storySleep');
     title.textContent=s.title;
@@ -1008,7 +1056,7 @@ tick();setInterval(tick,1000);
     book.classList.remove('showSecond','open');
     sleepLayer.classList.remove('show');
     document.body.classList.remove('storySleep');
-
+    /* لا توجد موسيقى */
     state.index=(state.index+1)%stories.length;
     save(); render();
   }
@@ -1080,117 +1128,6 @@ tick();setInterval(tick,1000);
   render();
 })();
 </script>
-
-
-<style id="fullscreen-story-low-motion-fix">
-/* كتاب الحكاية يأخذ معظم مساحة شاشة الهاتف مباشرة دون تمرير لأسفل */
-html.storyFocusMode, body.storyFocusMode{overflow:hidden!important;height:100%!important;overscroll-behavior:none!important;}
-#storyModal.show{position:fixed!important;inset:0!important;z-index:10001!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:4px!important;box-sizing:border-box!important;overflow:hidden!important;background:#071827!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;animation:none!important;}
-#storyModal.show:before,#storyModal.show:after{display:none!important;animation:none!important;filter:none!important;}
-#storyModal.show .storyCard{width:100%!important;max-width:100%!important;height:100%!important;max-height:100%!important;min-height:0!important;margin:0!important;padding:4px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;overflow:hidden!important;box-sizing:border-box!important;}
-#storyModal.show #storyBook{width:min(96vw,760px)!important;height:min(82dvh,760px)!important;min-height:0!important;max-height:82dvh!important;flex:0 1 auto!important;margin:auto!important;position:relative!important;inset:auto!important;transform:none!important;filter:none!important;perspective:900px!important;}
-#storyModal.show .storyCover{box-shadow:inset 0 0 18px rgba(255,255,255,.04)!important;transition:transform .28s ease-out,opacity .18s linear!important;}
-#storyModal.show .storyPages{box-shadow:none!important;animation:none!important;}
-#storyModal.show .storyPage{padding:clamp(14px,3.5vw,28px)!important;}
-#storyModal.show .storyPage:after,#storyModal.show .storyBook:after{display:none!important;filter:none!important;}
-#storyModal.show .storyClose{margin:4px auto 0!important;flex:0 0 auto!important;box-shadow:none!important;}
-/* أثناء الحكاية تتوقف مؤثرات الموقع الخلفية؛ نحتفظ فقط بسحب الصفحات */
-html.storyFocusMode body>*:not(#storyModal):not(#storySleepLayer),body.storyFocusMode>*:not(#storyModal):not(#storySleepLayer){animation:none!important;}
-body.storyFocusMode *{animation:none!important;box-shadow:none!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
-body.storyFocusMode .snow,body.storyFocusMode .snowfall,body.storyFocusMode .winterParticles,body.storyFocusMode .flower,body.storyFocusMode .flowers,body.storyFocusMode .floating-hearts,body.storyFocusMode .storyRain,body.storyFocusMode .storyStars{display:none!important;}
-body.storyFocusMode #storyModal .storyCover{transition:transform .28s ease-out,opacity .18s linear!important;}
-@media(max-width:700px){#storyModal.show #storyBook{width:96vw!important;height:82dvh!important;max-height:82dvh!important;}#storyModal.show .storyPage{padding:18px 15px!important;}#storyModal.show .storyPage .storyLine{font-size:15px!important;line-height:1.75!important;}#storyModal.show .storyPage h3{font-size:22px!important;margin-bottom:12px!important;}}
-@media(max-height:620px){#storyModal.show #storyBook{height:76dvh!important;max-height:76dvh!important;}#storyModal.show .storyClose{padding:7px 18px!important;}}
-</style>
-
-
-<style id="winter-story-fullscreen-final-fix">
-/* Keep the winter theme intact; only the bedtime-story view becomes fullscreen. */
-html.storyFocusMode, body.storyFocusMode { overflow:hidden!important; height:100%!important; overscroll-behavior:none!important; }
-#storyModal.show {
-  position:fixed!important; inset:0!important; z-index:2147483000!important;
-  display:flex!important; align-items:center!important; justify-content:center!important;
-  width:100vw!important; height:100vh!important; height:100dvh!important;
-  margin:0!important; padding:0!important; overflow:hidden!important; box-sizing:border-box!important;
-  background:linear-gradient(180deg,#071827,#0a2032 55%,#071522)!important;
-  backdrop-filter:none!important; -webkit-backdrop-filter:none!important; animation:none!important;
-}
-#storyModal.show::before, #storyModal.show::after { display:none!important; }
-#storyModal.show .storyCard {
-  position:static!important; display:block!important; width:100vw!important; max-width:100vw!important;
-  height:100dvh!important; max-height:100dvh!important; min-height:0!important;
-  margin:0!important; padding:0!important; overflow:hidden!important; border:0!important; border-radius:0!important;
-  background:transparent!important; box-shadow:none!important; box-sizing:border-box!important;
-}
-#storyModal.show #storyBook {
-  position:absolute!important; left:50%!important; top:50%!important; transform:translate(-50%,-50%)!important;
-  width:min(96vw,760px)!important; height:88dvh!important; max-height:900px!important; min-height:0!important;
-  margin:0!important; padding:0!important; perspective:900px!important; filter:none!important; flex:none!important;
-}
-#storyModal.show .storyCover { transition:transform .28s ease-out, opacity .18s linear!important; }
-#storyModal.show .storyPages { animation:none!important; box-shadow:none!important; }
-#storyModal.show .storyPage { padding:clamp(16px,3.5vw,28px)!important; }
-#storyModal.show .storyClose {
-  position:absolute!important; z-index:20!important; left:50%!important; bottom:max(6px,env(safe-area-inset-bottom))!important;
-  transform:translateX(-50%)!important; margin:0!important; padding:7px 16px!important;
-  font-size:13px!important; opacity:.82!important; box-shadow:none!important;
-}
-#storyModal.show .bookRibbon { z-index:4!important; right:8%!important; height:54px!important; filter:none!important; box-shadow:none!important; }
-#storyModal.show .storyBook.open .bookRibbon { display:none!important; }
-/* Pause the rest of the site's visual effects while the story is open, but preserve page swipes. */
-body.storyFocusMode #site *, html.storyFocusMode #site * {
-  animation-play-state:paused!important; transition:none!important; filter:none!important;
-  backdrop-filter:none!important; -webkit-backdrop-filter:none!important; box-shadow:none!important;
-}
-body.storyFocusMode #site canvas, body.storyFocusMode #site .snow,
-body.storyFocusMode #site .snowfall, body.storyFocusMode #site .winterParticles,
-body.storyFocusMode #site .flower, body.storyFocusMode #site .flowers,
-body.storyFocusMode #site .floating-hearts { visibility:hidden!important; }
-body.storyFocusMode .storyStars, body.storyFocusMode .storyRain { display:none!important; animation:none!important; }
-#storyModal.show .storyBook.open .storyCover { transition:transform .28s ease-out,opacity .18s linear!important; }
-#storyModal.show .storyPage.pageLeft, #storyModal.show .storyPage.pageRight { transition:transform .28s ease-out!important; }
-#storyModal.show .storyBook.pageTurn .storyPage { animation:none!important; }
-@media(max-width:700px) {
-  #storyModal.show #storyBook { width:96vw!important; height:88dvh!important; }
-  #storyModal.show .storyPage { padding:18px 15px!important; }
-  #storyModal.show .storyPage .storyLine { font-size:15px!important; line-height:1.75!important; }
-  #storyModal.show .storyPage h3 { font-size:22px!important; margin-bottom:12px!important; }
-}
-@media(max-height:620px) {
-  #storyModal.show #storyBook { height:82dvh!important; }
-  #storyModal.show .storyClose { padding:5px 12px!important; }
-}
-</style>
-
-
-<style id="full-winter-theme-restored">
-/* استعادة الثيم الشتوي على الموقع كله مع الحفاظ على محتوى الموقع وصوره */
-:root{--winter-ice:#bcecff;--winter-blue:#77c9ef;--winter-deep:#061827;--winter-glass:rgba(13,43,63,.76);--winter-border:rgba(190,235,255,.28)}
-html{scroll-behavior:smooth}
-body{background:radial-gradient(ellipse at 50% 0%,#173b53 0%,#081b2b 55%,#04111d 100%)!important;color:#f2faff!important}
-.login{background:radial-gradient(circle at 50% 12%,rgba(101,190,229,.38) 0,rgba(14,50,73,.92) 38%,#04111d 100%)!important}
-.card,.section,.birthdaySection,.storyBox,.gameInviteBox,.gameHud,.gameHeader,.gamePanel,.messageBox,.loveMessage,.memoryCard{background:linear-gradient(145deg,rgba(20,59,81,.84),rgba(8,30,47,.88))!important;border:1px solid var(--winter-border)!important;box-shadow:0 10px 28px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.06)!important;backdrop-filter:blur(7px)!important;-webkit-backdrop-filter:blur(7px)!important;color:#f2faff!important}
-button,.storyOpenBtn,.gameOpenBtn,.gameSmallBtn,.ctrl{background:linear-gradient(135deg,#bcecff,#75c5e8)!important;color:#082338!important;border:1px solid rgba(225,248,255,.42)!important;box-shadow:0 4px 12px rgba(70,170,215,.12)!important;transition:transform .16s ease,background-color .16s ease!important}
-button:active,.storyOpenBtn:active,.gameOpenBtn:active,.gameSmallBtn:active,.ctrl:active{transform:scale(.98)!important}
-.storyOpenBtn,.gameOpenBtn{background:linear-gradient(135deg,#c9f1ff,#83cce9)!important;color:#082338!important}
-input{background:rgba(2,19,32,.72)!important;border-color:rgba(184,230,250,.35)!important;color:#f5fbff!important}
-.hero{background-color:#092034!important}
-.storyBox{background:linear-gradient(145deg,rgba(22,65,88,.88),rgba(9,32,49,.9))!important}
-.storyOpenBtn{box-shadow:none!important}
-.storyModal{background:linear-gradient(180deg,rgba(3,14,25,.9),rgba(5,20,33,.96))!important;backdrop-filter:none!important}
-.storyCover{background:linear-gradient(145deg,#17425b,#286987 48%,#102e43)!important;border-color:rgba(190,235,255,.55)!important;color:#f1fbff!important;box-shadow:inset 0 0 20px rgba(255,255,255,.05)!important}
-.storyPages{background:linear-gradient(145deg,#102d41,#173b52 48%,#0c2638)!important;border-color:rgba(180,226,248,.42)!important}
-.storyPage{background:linear-gradient(100deg,#102d41,#173b52 12%,#15364b 88%,#0d293b)!important;color:#eaf8ff!important}
-.storyPage .storyLine{color:#eaf8ff!important;border-bottom-color:rgba(180,225,245,.14)!important}
-.gameCanvasWrap{box-shadow:none!important;border:1px solid rgba(190,235,255,.2)!important}
-/* ثلج خفيف على كل صفحات الموقع، ويتوقف بالكامل عند فتح الحكاية */
-#winterThemeSnow{position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.55;overflow:hidden;background-image:radial-gradient(2px 2px at 20px 35px,rgba(235,249,255,.9) 98%,transparent),radial-gradient(1.5px 1.5px at 110px 80px,rgba(220,244,255,.8) 98%,transparent),radial-gradient(2px 2px at 180px 130px,rgba(255,255,255,.72) 98%,transparent),radial-gradient(1px 1px at 70px 170px,rgba(220,244,255,.8) 98%,transparent);background-size:220px 220px;animation:winterSnowDrift 24s linear infinite;will-change:background-position}
-@keyframes winterSnowDrift{from{background-position:0 0}to{background-position:0 440px}}
-body.storyFocusMode #winterThemeSnow,html.storyFocusMode #winterThemeSnow{display:none!important;animation:none!important}
-@media(max-width:700px){.card,.section,.birthdaySection,.storyBox,.gameInviteBox,.gameHud,.gameHeader,.gamePanel,.messageBox,.loveMessage,.memoryCard{backdrop-filter:blur(4px)!important;-webkit-backdrop-filter:blur(4px)!important}#winterThemeSnow{opacity:.36;animation-duration:32s}}
-@media(prefers-reduced-motion:reduce){#winterThemeSnow{animation:none!important}html{scroll-behavior:auto}}
-</style>
-<div id="winterThemeSnow" aria-hidden="true"></div>
 
 </body>
 </html>
